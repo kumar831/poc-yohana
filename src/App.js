@@ -1,0 +1,71 @@
+import { useState } from "react";
+import "./App.css";
+import DailyScale from "./components/DailyScale";
+import Clockscale from "./components/ClockScale";
+import WeeklyChart from "./components/WeeklyChart";
+import { Button } from "react-bootstrap";
+import externalChannel from "./data/external_channel.json";
+
+function App() {
+  const [clockScale, setClockScale] = useState(true);
+  const [dailyScale, setDailyScale] = useState(false);
+  const [weeklyScale, setWeeklyScale] = useState(false);
+
+  const handleClockScale = () => {
+    setClockScale(true);
+    setDailyScale(false);
+    setWeeklyScale(false);
+  };
+
+  const handleDailyScale = () => {
+    setDailyScale(true);
+    setClockScale(false);
+    setWeeklyScale(false);
+  };
+
+  const handleWeeklyScale = () => {
+    setDailyScale(false);
+    setClockScale(false);
+    setWeeklyScale(true);
+  };
+
+  return (
+    <div className="App">
+      {/* <Clock /> */}
+      <div>
+        {clockScale ? <Clockscale /> : ""}
+        {dailyScale ? <DailyScale /> : ""}
+        {weeklyScale ? <WeeklyChart data={externalChannel}/> : ""}
+      </div>
+
+      <div className="buttons-list">
+        <Button
+          variant="primary"
+          className={clockScale ? 'text-background' : 'text-class'}
+          onClick={handleClockScale}
+        >
+          12H
+        </Button>
+        <Button
+          onClick={handleDailyScale}
+          variant="primary"
+          className={dailyScale ? 'text-background' : 'text-class'}
+        >
+          24H
+        </Button>
+        <Button
+         onClick={handleWeeklyScale}
+          variant="primary"
+          className={weeklyScale ? 'text-background' : 'text-class'}
+        >
+          Week Outline
+        </Button>
+        <Button variant="primary" className="text-class">
+          Month Outline
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+export default App;
