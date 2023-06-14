@@ -2,9 +2,10 @@ import { useState } from "react";
 import "./App.css";
 import DailyScale from "./components/DailyScale";
 import Clockscale from "./components/ClockScale";
-import WeeklyChart from "./components/WeeklyChart";
+//import WeeklyChart from "./components/WeeklyChart";
+import WeeklyScale from "./components/WeeklyScale";
 import { Button } from "react-bootstrap";
-import externalChannel from "./data/external_channel.json";
+//import externalChannel from "./data/external_channel.json";
 
 function App() {
   const [clockScale, setClockScale] = useState(true);
@@ -35,7 +36,8 @@ function App() {
       <div>
         {clockScale ? <Clockscale /> : ""}
         {dailyScale ? <DailyScale /> : ""}
-        {weeklyScale ? <WeeklyChart data={externalChannel}/> : ""}
+        {/* {weeklyScale ? <WeeklyChart data={externalChannel}/> : ""} */}
+        {weeklyScale ? <WeeklyScale /> : ""}
       </div>
 
       <div className="buttons-list">
@@ -54,7 +56,7 @@ function App() {
           24H
         </Button>
         <Button
-         onClick={handleWeeklyScale}
+          onClick={handleWeeklyScale}
           variant="primary"
           className={weeklyScale ? 'text-background' : 'text-class'}
         >
