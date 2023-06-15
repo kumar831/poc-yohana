@@ -55,7 +55,7 @@ export default function MonthlyScale() {
       fill: am5.color("#000000"),
       fontSize: 15
     }));
-    label.set("text", "Walking");
+    label.set("text", "June 3-9");
 
     ///1st Outer circle
     let series1 = chart.series.push(
@@ -103,6 +103,27 @@ export default function MonthlyScale() {
     series2.slices.template.states.create("hover", { scale: 0.95 });
     //to disable the tooltip on inner circle
     series2.slices.template.set("tooltipText", "");
+    series2.bullets.push(function(root, series) {
+      console.log('series',series)
+      let circles = series2._data._values;
+      let dataCircle
+      if(circles) {
+        dataCircle = circles.map((value) => {
+          if(value.isCircle) {
+            var circle = am5.Circle.new(root, {
+              radius: 5,
+              fill: am5.color("#000000"),
+            });
+            circle.events.on("click", function(ev) {
+              console.log("Clicked on a bullet!", ev.target);
+            });
+            return am5.Bullet.new(root, {
+              sprite: circle
+            });
+          }
+        })
+      } 
+    });
 
      //3rd Outer circle
      let series3 = chart.series.push(
@@ -138,16 +159,20 @@ export default function MonthlyScale() {
         country: "1",
         outer: 500,
         inner: 500,
+        isCircle: true
+      
       },
       {
         country: "2",
         outer: 500,
         inner: 500,
+        isCircle: false
       },
       {
         country: "3",
         outer: 500,
         inner: 500,
+        isCircle: false
       },
       {
         country: "4",

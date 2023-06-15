@@ -4,6 +4,7 @@ import * as am5percent from "@amcharts/amcharts5/percent";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import "../App.css";
 
+
 export default function WeeklyScale() {
   useEffect(() => {
     // Create root element
@@ -100,19 +101,39 @@ export default function WeeklyScale() {
     //to disable the tooltip on inner circle
     series2.slices.template.set("tooltipText", "");
     //Added bullets on the 2nd last circle
-    series2.bullets.push(function(root) {
-      var circle = am5.Circle.new(root, {
-        radius: 5,
-        //fill: am5.color("#000000"),
-        templateField: "bulletSettings"
+
+    series2.bullets.push(function() {
+      let cirCleMotion = am5.Bullet.new(root, {
+        sprite: am5.Picture.new(root, {
+          width: 32,
+          height: 32,
+          x: am5.percent(30),
+          y: am5.percent(50),
+          centerX: am5.percent(50),
+          centerY: am5.percent(50),
+          src: require("../activity2.png"),
+          className:"picture-item"
+        })
       });
-      circle.events.on("click", function(ev) {
-        console.log("Clicked on a bullet!", ev.target);
+      cirCleMotion.events.on("click", function(e) {
+        console.log('nnnn', e)
       });
-      return am5.Bullet.new(root, {
-        sprite: circle
-      });
+      return cirCleMotion
     });
+
+    // series2.bullets.push(function(root) {ß
+    //   var circle = am5.Circle.new(root, {
+    //     radius: 5,
+    //     //fill: am5.color("#000000"),
+    //     templateField: "bulletSettings"
+    //   });
+    //   circle.events.on("click", function(ev) {
+    //     console.log("Clicked on a bullet!", ev.target);
+    //   });
+    //   return am5.Bullet.new(root, {
+    //     sprite: circle
+    //   });
+    // });
   
 
      //3rd Outer circle

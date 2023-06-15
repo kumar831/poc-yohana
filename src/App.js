@@ -5,7 +5,6 @@ import Clockscale from "./components/ClockScale";
 import MonthlyScale from "./components/MonthlyScale";
 import WeeklyScale from "./components/WeeklyScale";
 import { Button } from "react-bootstrap";
-//import externalChannel from "./data/external_channel.json";
 
 function App() {
   const [clockScale, setClockScale] = useState(true);
@@ -47,7 +46,6 @@ function App() {
       <div>
         {clockScale ? <Clockscale /> : ""}
         {dailyScale ? <DailyScale /> : ""}
-        {/* {weeklyScale ? <WeeklyChart data={externalChannel}/> : ""} */}
         {weeklyScale ? <WeeklyScale /> : ""}
         {monthlyScale ? <MonthlyScale /> : ""}
       </div>

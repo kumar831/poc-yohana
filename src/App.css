@@ -16,6 +16,9 @@ body {
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.am5-html-container {
+  pointer-events: auto !important
+}
 
 .App-header {
   background-color: #282c34;
