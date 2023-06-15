@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import DailyScale from "./components/DailyScale";
 import Clockscale from "./components/ClockScale";
-//import WeeklyChart from "./components/WeeklyChart";
+import MonthlyScale from "./components/MonthlyScale";
 import WeeklyScale from "./components/WeeklyScale";
 import { Button } from "react-bootstrap";
 //import externalChannel from "./data/external_channel.json";
@@ -11,23 +11,34 @@ function App() {
   const [clockScale, setClockScale] = useState(true);
   const [dailyScale, setDailyScale] = useState(false);
   const [weeklyScale, setWeeklyScale] = useState(false);
+  const [monthlyScale, setMonthlyScale] = useState(false);
 
   const handleClockScale = () => {
     setClockScale(true);
     setDailyScale(false);
     setWeeklyScale(false);
+    setMonthlyScale(false)
   };
 
   const handleDailyScale = () => {
     setDailyScale(true);
     setClockScale(false);
     setWeeklyScale(false);
+    setMonthlyScale(false);
   };
 
   const handleWeeklyScale = () => {
     setDailyScale(false);
     setClockScale(false);
     setWeeklyScale(true);
+    setMonthlyScale(false);
+  };
+
+  const handleMonthlyScale = () => {
+    setDailyScale(false);
+    setClockScale(false);
+    setWeeklyScale(false);
+    setMonthlyScale(true);
   };
 
   return (
@@ -38,6 +49,7 @@ function App() {
         {dailyScale ? <DailyScale /> : ""}
         {/* {weeklyScale ? <WeeklyChart data={externalChannel}/> : ""} */}
         {weeklyScale ? <WeeklyScale /> : ""}
+        {monthlyScale ? <MonthlyScale /> : ""}
       </div>
 
       <div className="buttons-list">
@@ -62,7 +74,10 @@ function App() {
         >
           Week Outline
         </Button>
-        <Button variant="primary" className="text-class">
+        <Button
+          onClick={handleMonthlyScale} variant="primary" 
+          className={monthlyScale ? 'text-background' : 'text-class'}
+          >
           Month Outline
         </Button>
       </div>
