@@ -99,6 +99,21 @@ export default function WeeklyScale() {
     series2.slices.template.states.create("hover", { scale: 0.95 });
     //to disable the tooltip on inner circle
     series2.slices.template.set("tooltipText", "");
+    //Added bullets on the 2nd last circle
+    series2.bullets.push(function(root) {
+      var circle = am5.Circle.new(root, {
+        radius: 5,
+        //fill: am5.color("#000000"),
+        templateField: "bulletSettings"
+      });
+      circle.events.on("click", function(ev) {
+        console.log("Clicked on a bullet!", ev.target);
+      });
+      return am5.Bullet.new(root, {
+        sprite: circle
+      });
+    });
+  
 
      //3rd Outer circle
      let series3 = chart.series.push(
@@ -135,41 +150,65 @@ export default function WeeklyScale() {
         country: "Monday",
         outer: 500,
         inner: 500,
+        bulletSettings: {
+          fill: am5.color(0x009ACD)
+        }
       },
       {
         country: "Tuesday",
         outer: 500,
         inner: 500,
+        bulletSettings: {
+          fill: am5.color(0x009ACD)
+        }
       },
       {
         country: "Wednesday",
         outer: 500,
         inner: 500,
+        bulletSettings: {
+          fill: am5.color(0x009ACD)
+        }
       },
       {
         country: "Thursday",
         outer: 500,
         inner: 500,
+        bulletSettings: {
+          fill: am5.color(0x009ACD)
+        }
       },
       {
         country: "Friday",
         outer: 500,
         inner: 500,
+        bulletSettings: {
+          fill: am5.color(0x009ACD)
+        }
       },
       {
         country: "Saturday",
         outer: 500,
         inner: 500,
+        bulletSettings: {
+          fill: am5.color(0x009ACD)
+        }
       },
       {
         country: "Sunday",
         outer: 500,
         inner: 500,
+        bulletSettings: {
+          fill: am5.color(0x009ACD)
+        }
       },
       {
         country: "",
         outer: 500,
         inner: 500,
+        bulletSettings: {
+          fill: am5.color(0x009ACD)
+        }
       },
     ];
 
