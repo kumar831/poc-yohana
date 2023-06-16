@@ -16,8 +16,65 @@ body {
     animation: App-logo-spin infinite 20s linear;
   }
 }
-.am5-html-container {
+
+.title {
+  width: 540px !important;
+  height: 32px !important;
+  font-family: 'GT Walsheim' !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 24px !important;
+  line-height: 32px !important;
+  letter-spacing: -0.02em !important;
+  color: #1A1A1A !important;
+  flex: none !important;
+  order: 0 !important;
+  flex-grow: 1 !important;
+  z-index: 0 !important;
+  margin-top: 32px;
+  margin-bottom: 24px;
+}
+
+.header {
+  width: 560px !important;
+  height: 32px !important;
+
+  /* English/Title/S Bold *Updated* */
+
+  font-family: 'GT Walsheim' !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 24px !important;
+  line-height: 32px !important;
+  /* identical to box height, or 133% */
+
+  letter-spacing: -0.02em !important;
+
+  /* Typography/900 */
+
+  color: #1A1A1A !important;
+}
+
+/* .am5-html-container {
   pointer-events: auto !important
+} */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 12px;
+
+  position: absolute;
+  width: 656px;
+  height: 758px;
+  left: 20rem;
+  top: 5rem;
+
+  /* True White */
+
+  background: #FFFFFF;
+  border-radius: 24px;
 }
 
 .App-header {
@@ -311,6 +368,7 @@ span.activity5 {
   padding: 12px !important;
   cursor: pointer;
 }
+
 .text-background {
   color: white !important;
   background: black !important;
@@ -320,6 +378,7 @@ span.activity5 {
   padding: 12px !important;
   cursor: pointer;
 }
+
 .buttons-list {
   float: right;
   margin-right: 5rem;
@@ -553,6 +612,7 @@ span.clockactivity4 {
   --degMin: 0;
   --degSec: 0;
 }
+
 .h-hand,
 .m-hand,
 .s-hand {
@@ -560,6 +620,7 @@ span.clockactivity4 {
   transform-origin: bottom;
   border-radius: 40%;
 }
+
 .h-hand {
   width: 20px;
   height: 120px;
@@ -569,6 +630,7 @@ span.clockactivity4 {
   rotate: var(--degHour);
   border-radius: 20px 20px 0 0;
 }
+
 .m-hand {
   width: 10px;
   height: 145px;
@@ -578,6 +640,7 @@ span.clockactivity4 {
   rotate: var(--degMin);
   border-radius: 20px 20px 0 0;
 }
+
 .s-hand {
   width: 6px;
   height: 160px;
@@ -587,6 +650,7 @@ span.clockactivity4 {
   left: calc(50% - 2px);
   rotate: var(--degSec);
 }
+
 .s-hand::after {
   border-radius: 50%;
   display: block;
@@ -598,6 +662,7 @@ span.clockactivity4 {
   bottom: -15px;
   left: -15px;
 }
+
 /*****Weekly scale CSS*******/
 #chartdiv {
   width: 100%;

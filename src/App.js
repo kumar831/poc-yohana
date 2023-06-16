@@ -5,6 +5,7 @@ import Clockscale from "./components/ClockScale";
 import MonthlyScale from "./components/MonthlyScale";
 import WeeklyScale from "./components/WeeklyScale";
 import { Button } from "react-bootstrap";
+import FormRoutine from './components/FormRoutine'
 
 function App() {
   const [clockScale, setClockScale] = useState(true);
@@ -43,14 +44,15 @@ function App() {
   return (
     <div className="App">
       {/* <Clock /> */}
-      <div>
+      {/* <div>
         {clockScale ? <Clockscale /> : ""}
         {dailyScale ? <DailyScale /> : ""}
         {weeklyScale ? <WeeklyScale /> : ""}
         {monthlyScale ? <MonthlyScale /> : ""}
-      </div>
+      </div> */}
+      <FormRoutine/>
 
-      <div className="buttons-list">
+      {/* <div className="buttons-list">
         <Button
           variant="primary"
           className={clockScale ? 'text-background' : 'text-class'}
@@ -78,7 +80,7 @@ function App() {
           >
           Month Outline
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }
