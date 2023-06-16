@@ -78,9 +78,13 @@ export default function BasicModal() {
               label="Type"
               onChange={handleTypeChange}
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={10}>Alarm</MenuItem>
+              <MenuItem value={20}>Remainder</MenuItem>
+              <MenuItem value={30}>Sound</MenuItem>
+              <MenuItem value={30}>Movie</MenuItem>
+              <MenuItem value={30}>Timer</MenuItem>
+              <MenuItem value={30}>Check-in</MenuItem>
+              <MenuItem value={30}>No Action</MenuItem>
             </Select>
           </FormControl>
 
