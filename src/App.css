@@ -668,3 +668,15 @@ span.clockactivity4 {
   width: 100%;
   height: 500px;
 }
+
+.form-buttons {
+  display: flex !important;
+  flex-direction: row !important;
+  float: right;
+  margin-top: 10rem !important;
+}
+button.savebutton {
+  border-radius: 30px !important;
+  border-color: black;
+  color: black;
+}
