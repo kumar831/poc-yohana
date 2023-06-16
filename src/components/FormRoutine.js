@@ -45,11 +45,14 @@ export default function BasicModal() {
   const handleDurationChange = (event) => {
     setDuration(event.target.value);
   };
+  const handleNext = () => {
+
+  };
 
   return (
     <div>
       {/* <Button >Open modal</Button> */}
-      <Fab color="primary" aria-label="add">
+      <Fab color="primary" aria-label="add" className="add-icon" >
         <AddIcon onClick={handleOpen}/>
       </Fab>
       <Modal
@@ -59,7 +62,7 @@ export default function BasicModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography className="title" id="modal-modal-title" variant="h6" component="h2">
             Create Action
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
@@ -126,7 +129,7 @@ export default function BasicModal() {
 
           <FormControl className='form-buttons' sx={{ mt: 2 }}>
           <Button variant="outlined" className="savebutton">Save Draft</Button>
-          <Button variant="outlined" className="savebutton" sx={{ ml: 2 }}>Next</Button>
+          <Button variant="outlined" className="savebutton" sx={{ ml: 2 }} onClick={handleNext}>Next</Button>
           </FormControl>
         </Box>
       </Modal>
