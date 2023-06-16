@@ -12,10 +12,10 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
-// import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
-// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 
 const style = {
@@ -88,6 +88,29 @@ export default function BasicModal() {
             </Select>
           </FormControl>
 
+          
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DemoContainer
+              components={['MobileTimePicker', 'MobileTimePicker', 'MobileTimePicker']}
+            >
+               <InputLabel id="demo-simple-select-label">Target Time</InputLabel>
+              <div className='timepickercontainer'>
+             
+              <DemoItem>
+                <TimePicker views={['hours']} />
+              </DemoItem>
+              <DemoItem >
+                <TimePicker views={['minutes', 'seconds']} format="mm:ss" />
+              </DemoItem>
+              </div>
+            
+            </DemoContainer>
+          </LocalizationProvider>
+
+          <FormControl fullWidth sx={{ mt: 2 }}>
+          <FormControlLabel control={<Checkbox />} label="No Target Time" />
+          </FormControl>
+
           <FormControl fullWidth sx={{ mt: 2 }}>
             <InputLabel id="demo-simple-select-label">Duration</InputLabel>
             <Select
@@ -102,26 +125,6 @@ export default function BasicModal() {
               <MenuItem value={30}>Thirty</MenuItem>
             </Select>
           </FormControl>
-
-          <FormControl fullWidth sx={{ mt: 2 }}>
-          <FormControlLabel control={<Checkbox />} label="No Target Time" />
-          </FormControl>
-          
-          {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer
-        components={['MobileTimePicker', 'MobileTimePicker', 'MobileTimePicker']}
-      >
-        <DemoItem label={'"hours", "minutes" and "seconds"'}>
-          <TimePicker views={['hours', 'minutes', 'seconds']} />
-        </DemoItem>
-        <DemoItem label={'"hours"'}>
-          <TimePicker views={['hours']} />
-        </DemoItem>
-        <DemoItem label={'"minutes" and "seconds"'}>
-          <TimePicker views={['minutes', 'seconds']} format="mm:ss" />
-        </DemoItem>
-      </DemoContainer>
-    </LocalizationProvider> */}
 
 
           <FormControl className='form-buttons' sx={{ mt: 2 }}>
