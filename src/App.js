@@ -6,6 +6,7 @@ import MonthlyScale from "./components/MonthlyScale";
 import WeeklyScale from "./components/WeeklyScale";
 import { Button } from "react-bootstrap";
 import FormRoutine from './components/FormRoutine'
+import CreateRoutine from './components/CreateRoutine'
 
 function App() {
   const [clockScale, setClockScale] = useState(true);
@@ -50,7 +51,7 @@ function App() {
         {weeklyScale ? <WeeklyScale /> : ""}
         {monthlyScale ? <MonthlyScale /> : ""}
       </div> */}
-      <FormRoutine/>
+      <CreateRoutine/>
 
       {/* <div className="buttons-list">
         <Button

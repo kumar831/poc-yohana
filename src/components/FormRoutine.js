@@ -24,7 +24,7 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 500,
-  height:600,
+  height: 600,
   bgcolor: 'background.paper',
   borderRadius: 4,
   boxShadow: 24,
@@ -38,6 +38,7 @@ export default function BasicModal() {
 
   const [type, setType] = React.useState('');
   const [duration, setDuration] = React.useState('');
+  const [title, setTitle] = React.useState('');
 
   const handleTypeChange = (event) => {
     setType(event.target.value);
@@ -46,14 +47,22 @@ export default function BasicModal() {
     setDuration(event.target.value);
   };
   const handleNext = () => {
-
+    const obj = {
+      'routine_type': type,
+      'routine_duration': duration,
+      'title': title
+    }
+    console.log('postCall', obj)
   };
+  const handleTitle = (e) => {
+    setTitle(e.target.value);
+  }
 
   return (
     <div>
       {/* <Button >Open modal</Button> */}
       <Fab color="primary" aria-label="add" className="add-icon" >
-        <AddIcon onClick={handleOpen}/>
+        <AddIcon onClick={handleOpen} />
       </Fab>
       <Modal
         open={open}
@@ -69,10 +78,10 @@ export default function BasicModal() {
             Please describe the actions you would like the family to Sync.
           </Typography>
           <FormControl fullWidth sx={{ mt: 2 }}>
-          <TextField id="outlined-basic" label="Title" variant="outlined" />
+            <TextField id="outlined-basic" label="Title" variant="outlined" onChange={handleTitle} />
           </FormControl>
-           
-           <FormControl fullWidth sx={{ mt: 2 }}>
+
+          <FormControl fullWidth sx={{ mt: 2 }}>
             <InputLabel id="demo-simple-select-label">Type</InputLabel>
             <Select
               labelId="demo-simple-select-label"
@@ -81,37 +90,37 @@ export default function BasicModal() {
               label="Type"
               onChange={handleTypeChange}
             >
-              <MenuItem value={10}>Alarm</MenuItem>
-              <MenuItem value={20}>Remainder</MenuItem>
-              <MenuItem value={30}>Sound</MenuItem>
-              <MenuItem value={30}>Movie</MenuItem>
-              <MenuItem value={30}>Timer</MenuItem>
-              <MenuItem value={30}>Check-in</MenuItem>
-              <MenuItem value={30}>No Action</MenuItem>
+              <MenuItem value='Alarm'>Alarm</MenuItem>
+              <MenuItem value='Remainder'>Remainder</MenuItem>
+              <MenuItem value='Sound'>Sound</MenuItem>
+              <MenuItem value='Movie'>Movie</MenuItem>
+              <MenuItem value='Timer'>Timer</MenuItem>
+              <MenuItem value='Check-in'>Check-in</MenuItem>
+              <MenuItem value='No Action'>No Action</MenuItem>
             </Select>
           </FormControl>
 
-          
+
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoContainer
               components={['MobileTimePicker', 'MobileTimePicker', 'MobileTimePicker']}
             >
-               <InputLabel id="demo-simple-select-label">Target Time</InputLabel>
+              <InputLabel id="demo-simple-select-label">Target Time</InputLabel>
               <div className='timepickercontainer'>
-             
-              <DemoItem>
-                <TimePicker views={['hours']} />
-              </DemoItem>
-              <DemoItem >
-                <TimePicker views={['minutes', 'seconds']} format="mm:ss" />
-              </DemoItem>
+
+                <DemoItem>
+                  <TimePicker views={['hours']} />
+                </DemoItem>
+                <DemoItem >
+                  <TimePicker views={['minutes', 'seconds']} format="mm:ss" />
+                </DemoItem>
               </div>
-            
+
             </DemoContainer>
           </LocalizationProvider>
 
           <FormControl fullWidth sx={{ mt: 2 }}>
-          <FormControlLabel control={<Checkbox />} label="No Target Time" />
+            <FormControlLabel control={<Checkbox />} label="No Target Time" />
           </FormControl>
 
           <FormControl fullWidth sx={{ mt: 2 }}>
@@ -131,8 +140,8 @@ export default function BasicModal() {
 
 
           <FormControl className='form-buttons' sx={{ mt: 2 }}>
-          <Button variant="outlined" className="savebutton">Save Draft</Button>
-          <Button variant="outlined" className="savebutton" sx={{ ml: 2 }} onClick={handleNext}>Next</Button>
+            <Button variant="outlined" className="savebutton">Save Draft</Button>
+            <Button variant="outlined" className="savebutton" sx={{ ml: 2 }} onClick={handleNext}>Next</Button>
           </FormControl>
         </Box>
       </Modal>
