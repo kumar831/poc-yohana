@@ -17,7 +17,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { useSelector, useDispatch } from 'react-redux';
-import { setRoutineName, setRoutineType, setFrequency, setDays, setRoutineDetails} from '.././store/reducers/createRoutine'
+import { setRoutineDetails, setShowActionPopup} from '.././store/reducers/createRoutine';
+import DisplayRoutine from './DisplayRoutine';
 
 
 const style = {
@@ -35,13 +36,14 @@ const style = {
 
 export default function CreateRoutine() {
     const stateRoutine = useSelector((state) => state.routine)
-    const dispatch = useDispatch();  
+    const dispatch = useDispatch();
     const CHARACTER_LIMIT = 2000;
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     const [icon, setIcon] = React.useState(false)
+    const [actionPopup, setActionPopup] = React.useState(false)
 
     const [days, setDays] = React.useState('');
     const [description, setDescription] = React.useState('');
@@ -73,14 +75,22 @@ export default function CreateRoutine() {
         //dispatch(setFrequency(e.target.value))
         setFrequency(e.target.value)
     }
+    const openActionPopup = () => {
+        dispatch(setShowActionPopup(true))
+        setActionPopup(true);
+        setIcon(false);
+    }
 
     return (
         <div>
             {/* <Button >Open modal</Button> */}
             {icon && <Fab color="primary" aria-label="add" className="add-timer" >
-                <AddIcon/>
+                <AddIcon onClick={openActionPopup} />
             </Fab>}
-            
+            {
+                actionPopup && <DisplayRoutine/>
+            }
+
             <Fab color="primary" aria-label="add" className="add-icon" >
                 <AddIcon onClick={handleOpen} />
             </Fab>

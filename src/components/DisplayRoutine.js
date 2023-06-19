@@ -6,6 +6,8 @@ import Fab from '@mui/material/Fab';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import FormRoutine from './FormRoutine';
+import { useSelector, useDispatch } from 'react-redux';
+import { setShowActionPopup, setFormPopup} from '.././store/reducers/createRoutine';
 
 
 const style = {
@@ -22,40 +24,43 @@ const style = {
 
 export default function BasicModal() {
     const [open, setOpen] = React.useState(false);
+    const dispatch = useDispatch();
     const [actionForm, showActionForm] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const openRoutinePopup = () => showActionForm(true);
+    const openRoutinePopup = () => {
+        dispatch(setFormPopup(true));
+        dispatch(setShowActionPopup(true));
+        showActionForm(true);
+    }
+
+    const routine = useSelector((state) => state.routine)
 
     return (
         <div>
-            {/* <Button >Open modal</Button> */}
-            <Fab color="primary" aria-label="add">
-                <AddIcon onClick={handleOpen} />
-            </Fab>
             <Modal
-                open={open}
+                open={routine.showActionPopup}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
                     <div className='topcontainer'>
-                    <IconButton
-                    aria-label="close"
-                    onClick={handleClose}
-                    sx={{
-                        position: 'absolute',
-                        right: 12,
-                        top: 12,
-                        color: '#FFFFFF',
-                        background: '#898989',
-                        width:'25px',
-                        height:'25px',
-                    }}
-                    >
-                    <CloseIcon />
-                    </IconButton>
+                        <IconButton
+                            aria-label="close"
+                            onClick={handleClose}
+                            sx={{
+                                position: 'absolute',
+                                right: 12,
+                                top: 12,
+                                color: '#FFFFFF',
+                                background: '#898989',
+                                width: '25px',
+                                height: '25px',
+                            }}
+                        >
+                            <CloseIcon />
+                        </IconButton>
                         <p className='popup-heading'>
                             Morning Routine
                         </p>
@@ -77,7 +82,7 @@ export default function BasicModal() {
                             <input className="form-control border-right-0 select-input" />
                             <span className="input-group-append bg-white border-left-0 span-icon">
                                 <span className="input-group-text bg-transparent">
-                                    <AddIcon onClick={openRoutinePopup}/>
+                                    <AddIcon onClick={openRoutinePopup} />
                                 </span>
                             </span>
                         </div>
@@ -86,8 +91,8 @@ export default function BasicModal() {
 
                 </Box>
             </Modal>
-            {actionForm && (<FormRoutine/> )}
-            
+            {actionForm && (<FormRoutine />)}
+
         </div>
     );
 }

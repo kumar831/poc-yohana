@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    routine: {}
+    routine: {},
+    showActionPopup: false,
+    showFormPopup: false,
 }
 
 export const createRoutine = createSlice({
@@ -10,7 +12,7 @@ export const createRoutine = createSlice({
     reducers: {
 
         //Update Later 
-        
+
         // setRoutineName: (state, action) => {
         //     state.routine_name = action.payload
         // },
@@ -24,12 +26,19 @@ export const createRoutine = createSlice({
         //     state.frequency = action.payload
         // },
         setRoutineDetails: (state, action) => {
-            state.routine = action.payload
+            state.routine = action.payload;
+        },
+        setShowActionPopup: (state,action) => {
+            state.showActionPopup = action.payload;
+        },
+        setFormPopup: (state,action) => {
+            state.showFormPopup = action.payload;
         }
+
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { setRoutineName, setRoutineType, setDays, setFrequency, setRoutineDetails} = createRoutine.actions
+export const { setRoutineDetails, setShowActionPopup, setFormPopup} = createRoutine.actions
 
 export default createRoutine.reducer

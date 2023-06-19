@@ -12,6 +12,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const style = {
@@ -28,6 +29,8 @@ const style = {
 };
 
 export default function BasicModal() {
+  const routine = useSelector((state) => state.routine)
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -57,11 +60,11 @@ export default function BasicModal() {
   return (
     <div>
       {/* <Button >Open modal</Button> */}
-      <Fab color="primary" aria-label="add" className="add-icon" >
+      {/* <Fab color="primary" aria-label="add" className="add-icon" >
         <AddIcon onClick={handleOpen} />
-      </Fab>
+      </Fab> */}
       <Modal
-        open={open}
+        open={routine.showFormPopup}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
