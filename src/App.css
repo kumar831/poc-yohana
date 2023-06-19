@@ -669,10 +669,15 @@ span.clockactivity4 {
   display: flex !important;
   flex-direction: row !important;
   float: right;
-  margin-top: 10rem !important;
+  margin-top: 5rem !important;
 }
 button.savebutton {
   border-radius: 30px !important;
   border-color: black;
   color: black;
+}
+.timepickercontainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
