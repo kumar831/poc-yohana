@@ -7,6 +7,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import FormRoutine from './FormRoutine';
 import { useSelector, useDispatch } from 'react-redux';
 import { setShowActionPopup, setFormPopup } from '.././store/reducers/createRoutine';
+import Typography from '@mui/material/Typography';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
 
 
 const style = {
@@ -20,6 +23,25 @@ const style = {
     borderRadius: 4,
     boxShadow: 24,
 };
+const boxstyle = {
+    width: '65%',
+    bgcolor: '#FFFFFF',
+    borderRadius: '6px',
+    height: '40px',
+    padding: '4px',
+    display: 'flex',
+    justifyContent: 'space-between',
+}
+const boxstyle1 = {
+    width: '65%',
+    bgcolor: '#FFFFFF',
+    borderRadius: '6px',
+    height: '40px',
+    padding: '4px',
+    display: 'flex',
+    justifyContent: 'end',
+    cursor: 'pointer'
+}
 
 export default function BasicModal(props) {
     const routineData = props.routine
@@ -78,13 +100,28 @@ export default function BasicModal(props) {
                         </div>
                     </div>
                     <div className='bottomcontainer'>
-                        <div className="input-group">
-                            <input className="form-control border-right-0 select-input" />
-                            <span className="input-group-append bg-white border-left-0 span-icon">
-                                <span className="input-group-text bg-transparent">
+                        <div className='boxcontainer1'>
+                            <Box sx={boxstyle1}>
+                                <div className="boxsubcontent">
                                     <AddIcon onClick={openRoutinePopup} />
-                                </span>
-                            </span>
+                                </div>
+                            </Box>
+                        </div>
+                        <div className='boxcontainer'>
+                            <Box sx={boxstyle}>
+                                <div className='boxsubcontent'>
+                                    <RestaurantIcon sx={{ marginRight: '10px' }} />
+                                    <Typography id="modal-modal-description">
+                                        Wake up
+                                    </Typography>
+                                </div>
+                                <div className='boxsubcontent'>
+                                    <Typography id="modal-modal-description" sx={{ marginRight: '10px' }}>
+                                        7:15
+                                    </Typography>
+                                    <NavigateNextIcon />
+                                </div>
+                            </Box>
                         </div>
                     </div>
 

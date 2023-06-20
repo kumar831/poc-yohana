@@ -730,23 +730,6 @@ p.popup-subheading {
 .circle-div{
   margin-top: 5px;
 }
-input.form-control.select-input {
-  width: 60%;
-  border: 1.5px solid #A8A8A8;
-  border-radius: 8px;
-  height: 35px;
-}
-.input-group {
-  display: flex;
-  justify-content: center;
-  padding-top: 25px;
-}
-span.input-group-append.span-icon {
-  position: relative;
-  right: 35px;
-  top: 8px;
-  cursor: pointer;
-}
 .amcontent {
   width: 30px;
   height: 26px;
@@ -762,4 +745,19 @@ span.input-group-append.span-icon {
   border-radius: 0 0 3px 3px;
   line-height: 1.5;
   padding-left: 5px;
+}
+.boxcontainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+.boxsubcontent {
+  display: flex;
+  flex-direction: row;
+  padding: 8px;
+}
+.boxcontainer1 {
+  display: flex;
+  justify-content: center;
+  padding-top: 25px;
 }
