@@ -8,8 +8,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
 import { useSelector, useDispatch } from 'react-redux';
@@ -154,7 +152,7 @@ export default function CreateRoutine() {
                             className='description-field'
                             label="Description"
                             inputProps={{
-                                maxlength: CHARACTER_LIMIT
+                                maxLength: CHARACTER_LIMIT
                             }}
                             value={description}
                             helperText={`${description.length}/${CHARACTER_LIMIT}`}

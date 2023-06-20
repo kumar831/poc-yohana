@@ -10,9 +10,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import AddIcon from '@mui/icons-material/Add';
-import Fab from '@mui/material/Fab';
 import { useSelector, useDispatch } from 'react-redux';
+import { setFormPopup} from '.././store/reducers/createRoutine';
 
 
 const style = {
@@ -31,9 +30,9 @@ const style = {
 export default function BasicModal() {
   const routine = useSelector((state) => state.routine)
   const dispatch = useDispatch();
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    dispatch(setFormPopup(true));
+  };
 
   const [type, setType] = React.useState('');
   const [duration, setDuration] = React.useState('');
@@ -59,10 +58,6 @@ export default function BasicModal() {
 
   return (
     <div>
-      {/* <Button >Open modal</Button> */}
-      {/* <Fab color="primary" aria-label="add" className="add-icon" >
-        <AddIcon onClick={handleOpen} />
-      </Fab> */}
       <Modal
         open={routine.showFormPopup}
         onClose={handleClose}

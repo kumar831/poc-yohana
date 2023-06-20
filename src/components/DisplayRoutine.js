@@ -2,7 +2,6 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import AddIcon from '@mui/icons-material/Add';
-import Fab from '@mui/material/Fab';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import FormRoutine from './FormRoutine';
@@ -23,11 +22,11 @@ const style = {
 };
 
 export default function BasicModal() {
-    const [open, setOpen] = React.useState(false);
     const dispatch = useDispatch();
     const [actionForm, showActionForm] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        dispatch(setShowActionPopup(false));
+    }
     const openRoutinePopup = () => {
         dispatch(setFormPopup(true));
         dispatch(setShowActionPopup(true));
