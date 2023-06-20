@@ -4,13 +4,12 @@ import Modal from '@mui/material/Modal';
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import FormRoutine from './FormRoutine';
+import CreateAction from './CreateAction';
 import { useSelector, useDispatch } from 'react-redux';
 import { setShowActionPopup, setFormPopup } from '.././store/reducers/createRoutine';
 import Typography from '@mui/material/Typography';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
-
 
 const style = {
     position: 'absolute',
@@ -44,19 +43,19 @@ const boxstyle1 = {
 }
 
 export default function BasicModal(props) {
-    const routineData = props.routine
+    const routineData = props.routine;
     const dispatch = useDispatch();
     const [actionForm, showActionForm] = React.useState(false);
     const handleClose = () => {
         dispatch(setShowActionPopup(false));
     }
+    const routine = useSelector((state) => state.routine)
+    const actionsData = useSelector((state) => state.routine.allActions)
     const openRoutinePopup = () => {
         dispatch(setFormPopup(true));
         dispatch(setShowActionPopup(true));
         showActionForm(true);
     }
-
-    const routine = useSelector((state) => state.routine)
 
     return (
         <div>
@@ -107,28 +106,34 @@ export default function BasicModal(props) {
                                 </div>
                             </Box>
                         </div>
-                        <div className='boxcontainer'>
-                            <Box sx={boxstyle}>
-                                <div className='boxsubcontent'>
-                                    <RestaurantIcon sx={{ marginRight: '10px' }} />
-                                    <Typography id="modal-modal-description">
-                                        Wake up
-                                    </Typography>
-                                </div>
-                                <div className='boxsubcontent'>
-                                    <Typography id="modal-modal-description" sx={{ marginRight: '10px' }}>
-                                        7:15
-                                    </Typography>
-                                    <NavigateNextIcon />
-                                </div>
-                            </Box>
-                        </div>
+                        {
+                            actionsData.length && actionsData.map((item, i) => {
+                                return (
+                                    <div className='boxcontainer'>
+                                        <Box sx={boxstyle}>
+                                            <div className='boxsubcontent'>
+                                                <RestaurantIcon sx={{ marginRight: '10px' }} />
+                                                <Typography id="modal-modal-description">
+                                                    {item.action_title}
+                                                </Typography>
+                                            </div>
+                                            <div className='boxsubcontent'>
+                                                <Typography id="modal-modal-description" sx={{ marginRight: '10px' }}>
+                                                    {item.time}
+                                                </Typography>
+                                                <NavigateNextIcon />
+                                            </div>
+                                        </Box>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
 
 
                 </Box>
             </Modal>
-            {actionForm && (<FormRoutine routine={routineData} />)}
+            {actionForm && (<CreateAction routine={routineData} />)}
 
         </div>
     );

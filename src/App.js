@@ -5,7 +5,7 @@ import Clockscale from "./components/ClockScale";
 import MonthlyScale from "./components/MonthlyScale";
 import WeeklyScale from "./components/WeeklyScale";
 import { Button } from "react-bootstrap";
-import FormRoutine from './components/FormRoutine'
+import FormRoutine from './components/CreateAction'
 import CreateRoutine from './components/CreateRoutine'
 
 import DisplayRoutine from './components/DisplayRoutine';

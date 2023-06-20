@@ -11,9 +11,9 @@ import Select from '@mui/material/Select';
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
 import { useSelector, useDispatch } from 'react-redux';
-import { setRoutineDetails, setShowActionPopup } from '.././store/reducers/createRoutine';
+import { setRoutineDetails, setShowActionPopup, setActions } from '.././store/reducers/createRoutine';
 import DisplayRoutine from './DisplayRoutine';
-
+import axios from 'axios';
 
 const style = {
     position: 'absolute',
@@ -48,6 +48,9 @@ export default function CreateRoutine() {
     const [minutes, setMinutes] = React.useState('');
     const [displayRoutine, setDisplayRoutine] = React.useState('')
 
+
+    const GET_ROUTINES = 'https://x8ki-letl-twmt.n7.xano.io/api:kbXGTIcC/routine';
+
     const handleDays = (event) => {
         setDays(event.target.value);
     };
@@ -74,8 +77,15 @@ export default function CreateRoutine() {
     const openActionPopup = (item, i) => {
         dispatch(setShowActionPopup(true))
         setActionPopup(true);
-        setDisplayRoutine(item)
-        //setIcon(false);
+        setDisplayRoutine(item);
+        getAllRoutines();
+    }
+    const getAllRoutines = () => {
+        axios.get(GET_ROUTINES).then(response => {
+            if (response.status == '200') {
+                dispatch(setActions(response.data));
+            }
+        })
     }
     const handleClockMode = (event) => {
         setMode(event)

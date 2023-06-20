@@ -11,7 +11,7 @@ import Select from '@mui/material/Select';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFormPopup, setShowActionPopup } from '.././store/reducers/createRoutine';
+import { setFormPopup, setActions } from '../store/reducers/createRoutine';
 import axios from 'axios';
 
 
@@ -28,7 +28,7 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal(props) {
+export default function CreateAction(props) {
   const routineData = props.routine
   console.log('FormData', routineData);
   const routine = useSelector((state) => state.routine)
@@ -36,10 +36,14 @@ export default function BasicModal(props) {
   const handleClose = () => {
     dispatch(setFormPopup(false));
   };
-  const CREATE_URL = 'https://x8ki-letl-twmt.n7.xano.io/api:kbXGTIcC/routine'
+  const CREATE_URL = 'https://x8ki-letl-twmt.n7.xano.io/api:kbXGTIcC/routine';
+  const GET_ROUTINES = 'https://x8ki-letl-twmt.n7.xano.io/api:kbXGTIcC/routine';
   const [type, setType] = React.useState('');
   const [duration, setDuration] = React.useState('');
   const [title, setTitle] = React.useState('');
+  const [clockMode, setClockMode] = React.useState('');
+  const [hourly, setHourly] = React.useState('');
+  const [minutes, setMinutes] = React.useState('');
 
   const handleTypeChange = (event) => {
     setType(event.target.value);
@@ -49,7 +53,7 @@ export default function BasicModal(props) {
   };
   const handleSave = () => {
     axios.post(CREATE_URL, {
-      "time": routineData.time,
+      "time": hourly + ':' + minutes + ':' + clockMode,
       "routine": routineData.routine_name,
       "action_type": type,
       "action_title": title,
@@ -57,13 +61,26 @@ export default function BasicModal(props) {
       "routine_days": routineData.days,
       "user_id": 0
     }).then((response) => {
-      console.log('Response', response);
+      if (response.status == '200') {
+        handleClose();
+        axios.get(GET_ROUTINES).then(response => {
+          dispatch(setActions(response.data));
+        })
+      }
     })
   };
   const handleTitle = (e) => {
     setTitle(e.target.value);
   }
-
+  const handleClockMode = (event) => {
+    setClockMode(event)
+  }
+  const handleHours = (e) => {
+    setHourly(e.target.value)
+  }
+  const handleMinutes = (e) => {
+    setMinutes(e.target.value)
+  }
   return (
     <div>
       <Modal
@@ -106,12 +123,12 @@ export default function BasicModal(props) {
 
           <FormControl fullWidth sx={{ mt: 2 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <TextField id="outlined-basic" variant="outlined" />
+              <TextField id="outlined-basic" variant="outlined" onChange={handleHours} />
               <strong style={{ fontSize: '40px' }}>:</strong>
-              <TextField id="outlined-basic" variant="outlined" />
+              <TextField id="outlined-basic" variant="outlined" onChange={handleMinutes} />
               <div>
-                <div className='amcontent'>AM</div>
-                <div className='amcontent1'>PM</div>
+                <div className='amcontent' onClick={() => handleClockMode('AM')}>AM</div>
+                <div className='amcontent1' onClick={() => handleClockMode('PM')}>PM</div>
               </div>
             </div>
           </FormControl>
@@ -134,7 +151,6 @@ export default function BasicModal(props) {
               <MenuItem value={30}>Thirty</MenuItem>
             </Select>
           </FormControl>
-
 
           <FormControl className='form-buttons' sx={{ mt: 2 }}>
             <Button variant="outlined" className="savebutton" onClick={handleClose}>Discard</Button>
