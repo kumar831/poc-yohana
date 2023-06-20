@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import FormRoutine from './FormRoutine';
 import { useSelector, useDispatch } from 'react-redux';
-import { setShowActionPopup, setFormPopup} from '.././store/reducers/createRoutine';
+import { setShowActionPopup, setFormPopup } from '.././store/reducers/createRoutine';
 
 
 const style = {
@@ -21,7 +21,8 @@ const style = {
     boxShadow: 24,
 };
 
-export default function BasicModal() {
+export default function BasicModal(props) {
+    const routineData = props.routine
     const dispatch = useDispatch();
     const [actionForm, showActionForm] = React.useState(false);
     const handleClose = () => {
@@ -61,10 +62,10 @@ export default function BasicModal() {
                             <CloseIcon />
                         </IconButton>
                         <p className='popup-heading'>
-                            Morning Routine
+                            {routineData.routine_name}
                         </p>
                         <p className='popup-subheading'>
-                            07:15am (45m)
+                            {routineData.time}
                         </p>
                         <div className='circle-div'>
                             <div className='white-circle'>S</div>
@@ -90,7 +91,7 @@ export default function BasicModal() {
 
                 </Box>
             </Modal>
-            {actionForm && (<FormRoutine />)}
+            {actionForm && (<FormRoutine routine={routineData} />)}
 
         </div>
     );

@@ -11,7 +11,7 @@ import Select from '@mui/material/Select';
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
 import { useSelector, useDispatch } from 'react-redux';
-import { setRoutineDetails, setShowActionPopup} from '.././store/reducers/createRoutine';
+import { setRoutineDetails, setShowActionPopup } from '.././store/reducers/createRoutine';
 import DisplayRoutine from './DisplayRoutine';
 
 
@@ -29,7 +29,7 @@ const style = {
 };
 
 export default function CreateRoutine() {
-    const stateRoutine = useSelector((state) => state.routine)
+    const allRoutines = useSelector((state) => state.routine)
     const dispatch = useDispatch();
     const CHARACTER_LIMIT = 2000;
     const [open, setOpen] = React.useState(false);
@@ -43,9 +43,12 @@ export default function CreateRoutine() {
     const [description, setDescription] = React.useState('');
     const [routine, setRoutine] = React.useState('');
     const [frequency, setFrequency] = React.useState('');
+    const [mode, setMode] = React.useState('');
+    const [hourly, setHourly] = React.useState('');
+    const [minutes, setMinutes] = React.useState('');
+    const [displayRoutine, setDisplayRoutine] = React.useState('')
 
     const handleDays = (event) => {
-        //dispatch(setDays(event.target.value))
         setDays(event.target.value);
     };
     const handleDescription = (event) => {
@@ -56,35 +59,44 @@ export default function CreateRoutine() {
             routine_name: routine,
             days: days,
             frequency: frequency,
+            time: hourly + ':' + minutes + ':' + mode
         }
         dispatch(setRoutineDetails(routineDetails))
         handleClose();
         setIcon(true)
     };
     const handleRoutine = (e) => {
-        //dispatch(setRoutineName(e.target.value));
         setRoutine(e.target.value);
     }
     const handleFrequency = (e) => {
-        //dispatch(setFrequency(e.target.value))
         setFrequency(e.target.value)
     }
-    const openActionPopup = () => {
+    const openActionPopup = (item, i) => {
         dispatch(setShowActionPopup(true))
         setActionPopup(true);
-        setIcon(false);
+        setDisplayRoutine(item)
+        //setIcon(false);
+    }
+    const handleClockMode = (event) => {
+        setMode(event)
+    }
+    const handleHours = (e) => {
+        setHourly(e.target.value)
+    }
+    const handleMinutes = (e) => {
+        setMinutes(e.target.value)
     }
 
     return (
         <div>
-            {/* <Button >Open modal</Button> */}
-            {icon && <Fab color="primary" aria-label="add" className="add-timer" >
-                <AddIcon onClick={openActionPopup} />
-            </Fab>}
+            {icon && allRoutines.routine.length && allRoutines.routine.map((item, i) => {
+                return (<Fab color="primary" aria-label="add" className="add-timer" >
+                    <AddIcon onClick={() => openActionPopup(item, i)} key={i} index={i} />
+                </Fab>)
+            })}
             {
-                actionPopup && <DisplayRoutine/>
+                actionPopup && <DisplayRoutine routine={displayRoutine} />
             }
-
             <Fab color="primary" aria-label="add" className="add-icon" >
                 <AddIcon onClick={handleOpen} />
             </Fab>
@@ -136,14 +148,14 @@ export default function CreateRoutine() {
                     </FormControl>
 
                     <FormControl fullWidth sx={{ mt: 2 }}>
-                        <div style={{display:'flex', justifyContent: 'space-between'}}>
-                        <TextField id="outlined-basic" variant="outlined" />
-                        <strong style={{fontSize: '40px'}}>:</strong>
-                    <TextField id="outlined-basic" variant="outlined" />
-                    <div>
-                        <div className='amcontent'>AM</div>
-                        <div className='amcontent1'>PM</div>
-                    </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <TextField type="number" id="outlined-basic" variant="outlined" onChange={handleHours} />
+                            <strong style={{ fontSize: '40px' }}>:</strong>
+                            <TextField type="number" id="outlined-basic" variant="outlined" onChange={handleMinutes} />
+                            <div>
+                                <div className='amcontent' onClick={() => handleClockMode('AM')}>AM</div>
+                                <div className='amcontent1' onClick={() => handleClockMode('PM')}>PM</div>
+                            </div>
                         </div>
                     </FormControl>
 
@@ -163,7 +175,7 @@ export default function CreateRoutine() {
                     </FormControl>
 
                     <FormControl className='form-buttons' sx={{ mt: 2 }}>
-                        <Button variant="outlined" className="savebutton">Cancel</Button>
+                        <Button variant="outlined" className="savebutton" onClick={handleClose}>Cancel</Button>
                         <Button variant="outlined" className="savebutton" sx={{ ml: 2 }} onClick={handleSave}>Save</Button>
                     </FormControl>
                 </Box>

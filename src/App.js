@@ -52,12 +52,9 @@ function App() {
         {dailyScale ? <DailyScale /> : ""}
         {weeklyScale ? <WeeklyScale /> : ""}
         {monthlyScale ? <MonthlyScale /> : ""}
-      </div> */}
-      <CreateRoutine/>
-     
-      <DisplayRoutine/>
+      </div>
 
-      {/* <div className="buttons-list">
+      <div className="buttons-list">
         <Button
           variant="primary"
           className={clockScale ? 'text-background' : 'text-class'}
@@ -86,6 +83,8 @@ function App() {
           Month Outline
         </Button>
       </div> */}
+
+      <CreateRoutine/>
     </div>
   );
 }

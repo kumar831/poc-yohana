@@ -11,7 +11,8 @@ import Select from '@mui/material/Select';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFormPopup} from '.././store/reducers/createRoutine';
+import { setFormPopup, setShowActionPopup } from '.././store/reducers/createRoutine';
+import axios from 'axios';
 
 
 const style = {
@@ -27,13 +28,15 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal() {
+export default function BasicModal(props) {
+  const routineData = props.routine
+  console.log('FormData', routineData);
   const routine = useSelector((state) => state.routine)
   const dispatch = useDispatch();
   const handleClose = () => {
-    dispatch(setFormPopup(true));
+    dispatch(setFormPopup(false));
   };
-
+  const CREATE_URL = 'https://x8ki-letl-twmt.n7.xano.io/api:kbXGTIcC/routine'
   const [type, setType] = React.useState('');
   const [duration, setDuration] = React.useState('');
   const [title, setTitle] = React.useState('');
@@ -44,13 +47,18 @@ export default function BasicModal() {
   const handleDurationChange = (event) => {
     setDuration(event.target.value);
   };
-  const handleNext = () => {
-    const obj = {
-      'routine_type': type,
-      'routine_duration': duration,
-      'title': title
-    }
-    console.log('postCall', obj)
+  const handleSave = () => {
+    axios.post(CREATE_URL, {
+      "time": routineData.time,
+      "routine": routineData.routine_name,
+      "action_type": type,
+      "action_title": title,
+      "duration_in_sec": duration,
+      "routine_days": routineData.days,
+      "user_id": 0
+    }).then((response) => {
+      console.log('Response', response);
+    })
   };
   const handleTitle = (e) => {
     setTitle(e.target.value);
@@ -94,17 +102,17 @@ export default function BasicModal() {
             </Select>
           </FormControl>
 
-          
-  
-           <FormControl fullWidth sx={{ mt: 2 }}>
-            <div style={{display:'flex', justifyContent: 'space-between'}}>
-            <TextField id="outlined-basic" variant="outlined" />
-            <strong style={{fontSize: '40px'}}>:</strong>
-          <TextField id="outlined-basic" variant="outlined" />
-          <div>
-            <div className='amcontent'>AM</div>
-            <div className='amcontent1'>PM</div>
-          </div>
+
+
+          <FormControl fullWidth sx={{ mt: 2 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <TextField id="outlined-basic" variant="outlined" />
+              <strong style={{ fontSize: '40px' }}>:</strong>
+              <TextField id="outlined-basic" variant="outlined" />
+              <div>
+                <div className='amcontent'>AM</div>
+                <div className='amcontent1'>PM</div>
+              </div>
             </div>
           </FormControl>
 
@@ -129,8 +137,8 @@ export default function BasicModal() {
 
 
           <FormControl className='form-buttons' sx={{ mt: 2 }}>
-            <Button variant="outlined" className="savebutton">Save Draft</Button>
-            <Button variant="outlined" className="savebutton" sx={{ ml: 2 }} onClick={handleNext}>Next</Button>
+            <Button variant="outlined" className="savebutton" onClick={handleClose}>Discard</Button>
+            <Button variant="outlined" className="savebutton" sx={{ ml: 2 }} onClick={handleSave}>Save</Button>
           </FormControl>
         </Box>
       </Modal>

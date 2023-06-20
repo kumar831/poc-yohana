@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    routine: {},
+    routine: [],
     showActionPopup: false,
     showFormPopup: false,
 }
@@ -26,7 +26,8 @@ export const createRoutine = createSlice({
         //     state.frequency = action.payload
         // },
         setRoutineDetails: (state, action) => {
-            state.routine = action.payload;
+            state.routine.push(action.payload);
+            console.log('stateValue')
         },
         setShowActionPopup: (state,action) => {
             state.showActionPopup = action.payload;
