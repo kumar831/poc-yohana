@@ -7,6 +7,7 @@ import Modal from '@mui/material/Modal';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 import Select from '@mui/material/Select';
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
@@ -44,8 +45,10 @@ export default function CreateRoutine() {
     const [routine, setRoutine] = React.useState('');
     const [frequency, setFrequency] = React.useState('');
     const [mode, setMode] = React.useState('');
-    const [hourly, setHourly] = React.useState('');
-    const [minutes, setMinutes] = React.useState('');
+    const [startHourly, setStartHourly] = React.useState('');
+    const [startMinutes, setStartMinutes] = React.useState('');
+    const [endHourly, setEndHourly] = React.useState('');
+    const [endMinutes, setEndMinutes] = React.useState('');
     const [displayRoutine, setDisplayRoutine] = React.useState('')
 
 
@@ -62,7 +65,8 @@ export default function CreateRoutine() {
             routine_name: routine,
             days: days,
             frequency: frequency,
-            time: hourly + ':' + minutes + ':' + mode
+            start_time: startHourly + ':' + startMinutes + ':' + mode,
+            end_time: endHourly + ':' + endMinutes + ':' + mode,
         }
         dispatch(setRoutineDetails(routineDetails))
         handleClose();
@@ -71,9 +75,9 @@ export default function CreateRoutine() {
     const handleRoutine = (e) => {
         setRoutine(e.target.value);
     }
-    const handleFrequency = (e) => {
-        setFrequency(e.target.value)
-    }
+    // const handleFrequency = (e) => {
+    //     setFrequency(e.target.value)
+    // }
     const openActionPopup = (item, i) => {
         dispatch(setShowActionPopup(true))
         setActionPopup(true);
@@ -90,11 +94,17 @@ export default function CreateRoutine() {
     const handleClockMode = (event) => {
         setMode(event)
     }
-    const handleHours = (e) => {
-        setHourly(e.target.value)
+    const handleStartHours = (e) => {
+        setStartHourly(e.target.value)
     }
-    const handleMinutes = (e) => {
-        setMinutes(e.target.value)
+    const handleStartMinutes = (e) => {
+        setStartMinutes(e.target.value)
+    }
+    const handleEndHours = (e) => {
+        setEndHourly(e.target.value)
+    }
+    const handleEndMinutes = (e) => {
+        setEndMinutes(e.target.value)
     }
 
     return (
@@ -120,9 +130,9 @@ export default function CreateRoutine() {
                     <Typography className="title" id="modal-modal-title" variant="h6" component="h2">
                         Create Routine
                     </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                         Enter the family time you want to make better
-                    </Typography>
+                    </Typography> */}
                     <FormControl fullWidth sx={{ mt: 2 }}>
                         <TextField id="outlined-basic" label="Routine" variant="outlined" onChange={handleRoutine} />
                     </FormControl>
@@ -142,7 +152,9 @@ export default function CreateRoutine() {
                         </Select>
                     </FormControl>
 
-                    <FormControl fullWidth sx={{ mt: 2 }}>
+                    {/* Frequency */}
+
+                    {/* <FormControl fullWidth sx={{ mt: 2 }}>
                         <InputLabel id="demo-simple-select-label">Frequency</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
@@ -155,13 +167,27 @@ export default function CreateRoutine() {
                             <MenuItem value='Repeat'>Repeat</MenuItem>
                             <MenuItem value='Custom'>Custom</MenuItem>
                         </Select>
+                    </FormControl> */}
+
+                    <FormControl fullWidth sx={{ mt: 2 }}>
+                        <FormLabel>Start Time</FormLabel>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <TextField type="number" id="outlined-basic" variant="outlined" onChange={handleStartHours} />
+                            <strong style={{ fontSize: '40px' }}>:</strong>
+                            <TextField type="number" id="outlined-basic" variant="outlined" onChange={handleStartMinutes} />
+                            <div>
+                                <div className='amcontent' onClick={() => handleClockMode('AM')}>AM</div>
+                                <div className='amcontent1' onClick={() => handleClockMode('PM')}>PM</div>
+                            </div>
+                        </div>
                     </FormControl>
 
                     <FormControl fullWidth sx={{ mt: 2 }}>
+                    <FormLabel>End Time</FormLabel>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <TextField type="number" id="outlined-basic" variant="outlined" onChange={handleHours} />
+                            <TextField type="number" id="outlined-basic" variant="outlined" onChange={handleEndHours} />
                             <strong style={{ fontSize: '40px' }}>:</strong>
-                            <TextField type="number" id="outlined-basic" variant="outlined" onChange={handleMinutes} />
+                            <TextField type="number" id="outlined-basic" variant="outlined" onChange={handleEndMinutes} />
                             <div>
                                 <div className='amcontent' onClick={() => handleClockMode('AM')}>AM</div>
                                 <div className='amcontent1' onClick={() => handleClockMode('PM')}>PM</div>

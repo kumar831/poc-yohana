@@ -86,7 +86,7 @@ export default function BasicModal(props) {
                             {routineData.routine_name}
                         </p>
                         <p className='popup-subheading'>
-                            {routineData.time}
+                            {routineData.start_time}
                         </p>
                         <div className='circle-div'>
                             <div className='white-circle'>S</div>
