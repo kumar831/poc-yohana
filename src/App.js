@@ -7,7 +7,7 @@ import WeeklyScale from "./components/WeeklyScale";
 import { Button } from "react-bootstrap";
 import FormRoutine from './components/CreateAction'
 import CreateRoutine from './components/CreateRoutine'
-
+import Calendar from './components/Calendar'
 import DisplayRoutine from './components/DisplayRoutine';
 
 function App() {
@@ -83,7 +83,7 @@ function App() {
           Month Outline
         </Button>
       </div> */}
-
+      <Calendar/>
       <CreateRoutine/>
     </div>
   );
