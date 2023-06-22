@@ -35,8 +35,8 @@ export default function CreateAction(props) {
   const handleClose = () => {
     dispatch(setFormPopup(false));
   };
-  const CREATE_URL = 'https://x8ki-letl-twmt.n7.xano.io/api:kbXGTIcC/routine';
-  const GET_ROUTINES = 'https://x8ki-letl-twmt.n7.xano.io/api:kbXGTIcC/routine';
+  const ROUTINE_URL = 'https://x8ki-letl-twmt.n7.xano.io/api:Hku87tmd/routine';
+  
   const [type, setType] = React.useState('');
   const [duration, setDuration] = React.useState('');
   const [title, setTitle] = React.useState('');
@@ -51,7 +51,7 @@ export default function CreateAction(props) {
     setDuration(event.target.value);
   };
   const handleSave = () => {
-    axios.post(CREATE_URL, {
+    axios.post(ROUTINE_URL, {
       "time": hourly + ':' + minutes + ':' + clockMode,
       "routine": routineData.routine_name,
       "action_type": type,
@@ -62,7 +62,7 @@ export default function CreateAction(props) {
     }).then((response) => {
       if (response.status == '200') {
         handleClose();
-        axios.get(GET_ROUTINES).then(response => {
+        axios.get(ROUTINE_URL).then(response => {
           dispatch(setActions(response.data));
         })
       }
