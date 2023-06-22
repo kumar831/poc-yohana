@@ -107,7 +107,7 @@ export default function BasicModal(props) {
                             </Box>
                         </div>
                         {
-                            actionsData.length && actionsData.map((item, i) => {
+                            actionsData.length>0&& actionsData.map((item) => {
                                 return (
                                     <div className='boxcontainer'>
                                         <Box sx={boxstyle}>

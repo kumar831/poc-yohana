@@ -50,6 +50,7 @@ export default function CreateRoutine() {
     const [endHourly, setEndHourly] = React.useState('');
     const [endMinutes, setEndMinutes] = React.useState('');
     const [displayRoutine, setDisplayRoutine] = React.useState('')
+    const [index, setIndex] = React.useState(0)
 
 
     const GET_ROUTINES = 'https://x8ki-letl-twmt.n7.xano.io/api:kbXGTIcC/routine';
@@ -62,13 +63,18 @@ export default function CreateRoutine() {
     };
     const handleSave = () => {
         const routineDetails = {
+            id:index,
             routine_name: routine,
+            title: routine,
             days: days,
+            start: startHourly,
+            end:endHourly,
             frequency: frequency,
             start_time: startHourly + ':' + startMinutes + ':' + mode,
             end_time: endHourly + ':' + endMinutes + ':' + mode,
         }
         dispatch(setRoutineDetails(routineDetails))
+        setIndex(index+1)
         handleClose();
         setIcon(true)
     };
@@ -109,11 +115,11 @@ export default function CreateRoutine() {
 
     return (
         <div>
-            {icon && allRoutines.routine.length && allRoutines.routine.map((item, i) => {
+            {/* {icon && allRoutines.routine.length && allRoutines.routine.map((item, i) => {
                 return (<Fab color="primary" aria-label="add" className="add-timer" >
                     <AddIcon onClick={() => openActionPopup(item, i)} key={i} index={i} />
                 </Fab>)
-            })}
+            })} */}
             {
                 actionPopup && <DisplayRoutine routine={displayRoutine} />
             }

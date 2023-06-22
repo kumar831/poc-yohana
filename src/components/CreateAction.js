@@ -30,7 +30,6 @@ const style = {
 
 export default function CreateAction(props) {
   const routineData = props.routine
-  console.log('FormData', routineData);
   const routine = useSelector((state) => state.routine)
   const dispatch = useDispatch();
   const handleClose = () => {
@@ -69,6 +68,7 @@ export default function CreateAction(props) {
       }
     })
   };
+  
   const handleTitle = (e) => {
     setTitle(e.target.value);
   }
