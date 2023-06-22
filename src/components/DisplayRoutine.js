@@ -1,15 +1,13 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import CreateAction from './CreateAction';
 import { useSelector, useDispatch } from 'react-redux';
 import { setShowActionPopup, setFormPopup } from '.././store/reducers/createRoutine';
 import Typography from '@mui/material/Typography';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import RestaurantIcon from '@mui/icons-material/Restaurant';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const style = {
     position: 'absolute',
@@ -82,12 +80,16 @@ export default function BasicModal(props) {
                         >
                             <CloseIcon />
                         </IconButton>
+                        <div style={{display:'flex'}}>
                         <p className='popup-heading'>
                             {routineData.routine_name}
                         </p>
+                        <img src={require('../edit.png')} alt='edit'className='editIcon'/>
+                        </div>
+                        
                         <p className='popup-subheading'>
                             {routineData.start_time}
-                        </p>
+                        </p>                  
                         <div className='circle-div'>
                             <div className='white-circle'>S</div>
                             <div className='white-circle'>M</div>
@@ -102,7 +104,7 @@ export default function BasicModal(props) {
                         <div className='boxcontainer1'>
                             <Box sx={boxstyle1}>
                                 <div className="boxsubcontent">
-                                    <AddIcon onClick={openRoutinePopup} />
+                                    <img src={require('../add.png')} alt='add' onClick={openRoutinePopup}/>
                                 </div>
                             </Box>
                         </div>
@@ -112,7 +114,8 @@ export default function BasicModal(props) {
                                     <div className='boxcontainer'>
                                         <Box sx={boxstyle}>
                                             <div className='boxsubcontent'>
-                                                <RestaurantIcon sx={{ marginRight: '10px' }} />
+                                                <img src={require('../Ellipse.png')} alt='ellipse' className='ellipseIcon'/>
+                                                <img src={require('../Directions.png')} alt='direction'className='directionIcon'/>
                                                 <Typography id="modal-modal-description">
                                                     {item.action_title}
                                                 </Typography>
@@ -121,7 +124,8 @@ export default function BasicModal(props) {
                                                 <Typography id="modal-modal-description" sx={{ marginRight: '10px' }}>
                                                     {item.time}
                                                 </Typography>
-                                                <NavigateNextIcon />
+                                                <img src={require('../Expand.png')} alt='expand'/>
+                                                <DeleteIcon/>
                                             </div>
                                         </Box>
                                     </div>
