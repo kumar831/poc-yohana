@@ -7,9 +7,8 @@ import WeeklyScale from "./components/WeeklyScale";
 import { Button } from "react-bootstrap";
 import FormRoutine from './components/CreateAction'
 import CreateRoutine from './components/CreateRoutine'
-import Calendar from './components/Calendar'
 import DisplayRoutine from './components/DisplayRoutine';
-import CalendarClock from './components/CalendarTime';
+//import CalendarClock from './components/CalendarTime';
 import reportWebVitals from './reportWebVitals';
 import { registerLicense } from '@syncfusion/ej2-base';
 import BigCalendar from "./components/BigCalendar";

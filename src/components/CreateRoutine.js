@@ -123,9 +123,12 @@ export default function CreateRoutine() {
             {
                 actionPopup && <DisplayRoutine routine={displayRoutine} />
             }
+            <div className='addIconDiv'>
             <Fab color="primary" aria-label="add" className="add-icon" >
                 <AddIcon onClick={handleOpen} />
             </Fab>
+            </div>
+            
             <Modal
                 open={open}
                 onClose={handleClose}

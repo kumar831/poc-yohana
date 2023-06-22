@@ -8,6 +8,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setShowActionPopup, setFormPopup } from '.././store/reducers/createRoutine';
 import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const style = {
     position: 'absolute',
@@ -54,6 +60,15 @@ export default function BasicModal(props) {
         dispatch(setShowActionPopup(true));
         showActionForm(true);
     }
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleDeletePopup = () => {
+        setOpen(false);
+    };
 
     return (
         <div>
@@ -80,16 +95,16 @@ export default function BasicModal(props) {
                         >
                             <CloseIcon />
                         </IconButton>
-                        <div style={{display:'flex'}}>
-                        <p className='popup-heading'>
-                            {routineData.routine_name}
-                        </p>
-                        <img src={require('../edit.png')} alt='edit'className='editIcon'/>
+                        <div style={{ display: 'flex' }}>
+                            <p className='popup-heading'>
+                                {routineData.routine_name}
+                            </p>
+                            <img src={require('../edit.png')} alt='edit' className='editIcon' />
                         </div>
-                        
+
                         <p className='popup-subheading'>
                             {routineData.start_time}
-                        </p>                  
+                        </p>
                         <div className='circle-div'>
                             <div className='white-circle'>S</div>
                             <div className='white-circle'>M</div>
@@ -104,18 +119,18 @@ export default function BasicModal(props) {
                         <div className='boxcontainer1'>
                             <Box sx={boxstyle1}>
                                 <div className="boxsubcontent">
-                                    <img src={require('../add.png')} alt='add' onClick={openRoutinePopup}/>
+                                    <img src={require('../add.png')} alt='add' onClick={openRoutinePopup} />
                                 </div>
                             </Box>
                         </div>
                         {
-                            actionsData.length>0&& actionsData.map((item) => {
+                            actionsData.length > 0 && actionsData.map((item) => {
                                 return (
                                     <div className='boxcontainer'>
                                         <Box sx={boxstyle}>
                                             <div className='boxsubcontent'>
-                                                <img src={require('../Ellipse.png')} alt='ellipse' className='ellipseIcon'/>
-                                                <img src={require('../Directions.png')} alt='direction'className='directionIcon'/>
+                                                <img src={require('../Ellipse.png')} alt='ellipse' className='ellipseIcon' />
+                                                <img src={require('../Directions.png')} alt='direction' className='directionIcon' />
                                                 <Typography id="modal-modal-description">
                                                     {item.action_title}
                                                 </Typography>
@@ -124,8 +139,30 @@ export default function BasicModal(props) {
                                                 <Typography id="modal-modal-description" sx={{ marginRight: '10px' }}>
                                                     {item.time}
                                                 </Typography>
-                                                <img src={require('../Expand.png')} alt='expand'/>
-                                                <DeleteIcon/>
+                                                <img src={require('../Expand.png')} alt='expand' />
+                                                <DeleteIcon onClick={handleClickOpen} />
+
+                                                <Dialog
+                                                    open={open}
+                                                    onClose={handleDeletePopup}
+                                                    aria-labelledby="alert-dialog-title"
+                                                    aria-describedby="alert-dialog-description"
+                                                >
+                                                    <DialogTitle id="alert-dialog-title">
+                                                        {"Delete Action"}
+                                                    </DialogTitle>
+                                                    <DialogContent>
+                                                        <DialogContentText id="alert-dialog-description">
+                                                            Are you sure you want to delete this action?
+                                                        </DialogContentText>
+                                                    </DialogContent>
+                                                    <DialogActions className='dialogactionsection'>
+                                                        <Button onClick={handleDeletePopup} variant="contained" color="error">No</Button>
+                                                        <Button onClick={handleDeletePopup} variant="contained" color="primary" autoFocus>
+                                                            Yes
+                                                        </Button>
+                                                    </DialogActions>
+                                                </Dialog>
                                             </div>
                                         </Box>
                                     </div>
