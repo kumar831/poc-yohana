@@ -11,6 +11,7 @@ import FormLabel from '@mui/material/FormLabel';
 import Select from '@mui/material/Select';
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
+import Divider from '@mui/material/Divider';
 import { useSelector, useDispatch } from 'react-redux';
 import { setRoutineDetails, setShowActionPopup, setActions } from '.././store/reducers/createRoutine';
 import DisplayRoutine from './DisplayRoutine';
@@ -143,11 +144,11 @@ export default function CreateRoutine() {
                         Enter the family time you want to make better
                     </Typography> */}
                     <FormControl fullWidth sx={{ mt: 2 }}>
-                        <TextField id="outlined-basic" label="Routine" variant="outlined" onChange={handleRoutine} />
+                        <TextField id="outlined-basic" label="Routine Name" variant="outlined" className="label-size" onChange={handleRoutine} />
                     </FormControl>
 
                     <FormControl fullWidth sx={{ mt: 2 }}>
-                        <InputLabel id="demo-simple-select-label">Days</InputLabel>
+                        <InputLabel id="demo-simple-select-label" sx={{fontSize:14}}>Days</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
@@ -179,11 +180,11 @@ export default function CreateRoutine() {
                     </FormControl> */}
 
                     <FormControl fullWidth sx={{ mt: 2 }}>
-                        <FormLabel>Start Time</FormLabel>
+                        <FormLabel sx={{fontSize:14}}>Start Time</FormLabel>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <TextField type="number" id="outlined-basic" variant="outlined" onChange={handleStartHours} />
-                            <strong style={{ fontSize: '40px' }}>:</strong>
-                            <TextField type="number" id="outlined-basic" variant="outlined" onChange={handleStartMinutes} />
+                            <TextField style={{width:'200px'}} id="outlined-basic" variant="outlined" onChange={handleStartHours} />
+                            <strong style={{ fontSize: '40px'}}>:</strong>
+                            <TextField style={{width:'200px'}} id="outlined-basic" variant="outlined" onChange={handleStartMinutes} />
                             <div>
                                 <div className='amcontent' onClick={() => handleClockMode('AM')}>AM</div>
                                 <div className='amcontent1' onClick={() => handleClockMode('PM')}>PM</div>
@@ -192,11 +193,11 @@ export default function CreateRoutine() {
                     </FormControl>
 
                     <FormControl fullWidth sx={{ mt: 2 }}>
-                    <FormLabel>End Time</FormLabel>
+                    <FormLabel sx={{fontSize:14}}>End Time</FormLabel>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <TextField type="number" id="outlined-basic" variant="outlined" onChange={handleEndHours} />
-                            <strong style={{ fontSize: '40px' }}>:</strong>
-                            <TextField type="number" id="outlined-basic" variant="outlined" onChange={handleEndMinutes} />
+                            <TextField style={{width:'200px'}}  id="outlined-basic" variant="outlined" onChange={handleEndHours} />
+                            <strong style={{ fontSize: '40px'}}>:</strong>
+                            <TextField style={{width:'200px'}} id="outlined-basic" variant="outlined" onChange={handleEndMinutes} />
                             <div>
                                 <div className='amcontent' onClick={() => handleClockMode('AM')}>AM</div>
                                 <div className='amcontent1' onClick={() => handleClockMode('PM')}>PM</div>
@@ -206,7 +207,7 @@ export default function CreateRoutine() {
 
                     <FormControl fullWidth sx={{ mt: 2 }}>
                         <TextField
-                            className='description-field'
+                            className='description-field label-size'
                             label="Description"
                             inputProps={{
                                 maxLength: CHARACTER_LIMIT
@@ -218,7 +219,7 @@ export default function CreateRoutine() {
                             variant="outlined"
                         />
                     </FormControl>
-
+                    <Divider light style={{marginTop:'2rem'}}/>
                     <FormControl className='form-buttons' sx={{ mt: 2 }}>
                         <Button variant="outlined" className="savebutton" onClick={handleClose}>Cancel</Button>
                         <Button variant="outlined" className="savebutton" sx={{ ml: 2 }} onClick={handleSave}>Save</Button>

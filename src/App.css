@@ -4,6 +4,7 @@
 
 body {
   background-color: #f4f0ec;
+  font-family: GT Walsheim;
 }
 
 .App-logo {
@@ -32,12 +33,13 @@ body {
   margin: 40px
 }
 .title {
-  font-style: normal !important;
-  font-weight: 700 !important;
-  font-size: 20px !important;
-  line-height: 32px !important;
-  letter-spacing: -0.02em !important;
-  color: #1A1A1A !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+    font-size: 24px !important;
+    line-height: 32px !important;
+    letter-spacing: -0.02em !important;
+    font-family: GT Walsheim !important;
+    color: var(--typography-900, #1A1A1A);
 }
 
 .header {
@@ -691,12 +693,24 @@ span.clockactivity4 {
   display: flex !important;
   flex-direction: row !important;
   float: right;
-  margin-top: 5rem !important;
+  margin-top: 2rem !important;
 }
 button.savebutton {
-  border-radius: 30px !important;
-  border-color: black;
-  color: black;
+    border-radius: 24px !important;
+    border-color: black;
+    height: 40px;
+    color: var(--base-opaque-base-900, #1A1A1A);
+    text-align: center;
+    font-size: 14px;
+    line-height: 22px;
+    text-transform: capitalize !important;
+    letter-spacing: 0.16px;
+    padding: 20px;
+}
+.savebutton:hover{
+  background-color: #1A1A1A !important;
+  color: #ffffff;
+  border-color:#1A1A1A !important;
 }
 .timepickercontainer {
   display: flex;
@@ -705,13 +719,12 @@ button.savebutton {
 }
 /*******Display routine CSS*********/
 .topcontainer {
-  height: 90px;
-  background: #F8D472;
-  padding: 30px;
-  border-radius: 15px 15px 0px 0px;
+  height: 110px;
+    background: #F8D472;
+    padding: 25px 0px 10px 50px;
+    border-radius: 35px 35px 0px 0px;
 }
 p.popup-heading {
-  font-family: 'GT Walsheim';
   font-style: normal;
   font-weight: 700;
   font-size: 30.375px;
@@ -719,18 +732,17 @@ p.popup-heading {
   margin: 0 !important;
 }
 p.popup-subheading {
-  font-family: 'GT Walsheim';
   font-style: normal;
   font-weight: 700;
-  font-size: 20.5052px;
-  line-height: 1.8;
+  font-size: 18.5052px;
+  line-height: 0.8;
   color: #000000;
   margin: 0 !important;
 }
 .bottomcontainer {
   background: #FDEBB9;
-  border-radius: 0px 0px 15px 15px;
-  height: 460px;
+  border-radius: 0px 0px 35px 35px;
+  height: 470px;
   overflow-x: scroll;
 }
 .white-circle {
@@ -749,23 +761,23 @@ p.popup-subheading {
   color: #070707;
 }
 .circle-div{
-  margin-top: 5px;
+  margin-top: 10px;
 }
 .amcontent {
-  width: 30px;
-  height: 26px;
-  border: 1px solid #79747E;
-  border-radius: 3px 3px 0 0;
-  line-height: 1.5;
-  padding-left: 5px;
+  width: 40px;
+    height: 24px;
+    border: 1px solid #79747E;
+    border-radius: 3px 3px 0 0;
+    line-height: 1.5;
+    padding-left: 8px;
 }
 .amcontent1 {
-  width: 30px;
-  height: 26px;
+  width: 40px;
+  height: 24px;
   border: 1px solid #79747E;
   border-radius: 0 0 3px 3px;
   line-height: 1.5;
-  padding-left: 5px;
+  padding-left: 8px;
 }
 .boxcontainer {
   display: flex;
@@ -783,21 +795,40 @@ p.popup-subheading {
   padding-top: 25px;
 }
 .ellipseIcon{
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
+  width: 35px;
+  height: 35px;
+  margin-right: 9px;
+  margin-top: -6px;
 }
 .directionIcon{
-    position: absolute;
-    width: 20px;
-    height: 20px;
+  position: relative;
+    right: 44px;
+    width: 25px;
+    height: 25px;
+    margin-top: -5px;
     padding: 5px;
 }
 img.editIcon {
   width: 25px;
   height: 25px;
-  margin: 4px;
+  margin: 8px;
 }
 .dialogactionsection {
   padding: 10px 20px 20px 20px;
+}
+.action-title{
+  color: var(--brand-charcoal, #2A2A2A) !important;
+    font-size: 16px !important;
+    font-family: GT Walsheim !important;
+    font-weight: 700 !important;
+    margin-left: -25px !important;
+}
+.action-time{
+  color: #000 !important;
+font-size: 16px !important;
+font-family: GT Walsheim !important;
+font-weight: 700 !important;
+}
+.label-size label {
+  font-size: 14px;
 }

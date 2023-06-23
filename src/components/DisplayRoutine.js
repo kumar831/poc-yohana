@@ -14,6 +14,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import axios from 'axios';
 
 const style = {
     position: 'absolute',
@@ -23,14 +24,14 @@ const style = {
     width: 500,
     height: 600,
     bgcolor: 'background.paper',
-    borderRadius: 4,
+    borderRadius: 35,
     boxShadow: 24,
 };
 const boxstyle = {
     width: '65%',
     bgcolor: '#FFFFFF',
     borderRadius: '6px',
-    height: '40px',
+    height: '45px',
     padding: '4px',
     display: 'flex',
     justifyContent: 'space-between',
@@ -61,6 +62,7 @@ export default function BasicModal(props) {
         showActionForm(true);
     }
     const [open, setOpen] = React.useState(false);
+    const deleteURL = 'https://x8ki-letl-twmt.n7.xano.io/api:Hku87tmd/routine';
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -69,6 +71,12 @@ export default function BasicModal(props) {
     const handleDeletePopup = () => {
         setOpen(false);
     };
+     const handleDeleteRoutine=(data)=>{
+        console.log(data)
+        // axios.delete(deleteURL,{
+        //     routine_id:
+        // })
+     }
 
     return (
         <div>
@@ -100,6 +108,29 @@ export default function BasicModal(props) {
                                 {routineData.routine_name}
                             </p>
                             <img src={require('../edit.png')} alt='edit' className='editIcon' />
+                            <DeleteIcon onClick={handleClickOpen} style={{ width: '20px', height: '20px', marginTop:'10px' }} />
+
+                            <Dialog
+                                open={open}
+                                onClose={handleDeletePopup}
+                                aria-labelledby="alert-dialog-title"
+                                aria-describedby="alert-dialog-description"
+                            >
+                                <DialogTitle id="alert-dialog-title">
+                                    {"Delete Action"}
+                                </DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText id="alert-dialog-description">
+                                        Are you sure you want to delete this action?
+                                    </DialogContentText>
+                                </DialogContent>
+                                <DialogActions className='dialogactionsection'>
+                                    <Button onClick={handleDeletePopup} variant="contained" color="error">No</Button>
+                                    <Button onClick={handleDeleteRoutine(routineData)} variant="contained" color="primary" autoFocus>
+                                        Yes
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
                         </div>
 
                         <p className='popup-subheading'>
@@ -119,7 +150,7 @@ export default function BasicModal(props) {
                         <div className='boxcontainer1'>
                             <Box sx={boxstyle1}>
                                 <div className="boxsubcontent">
-                                    <img src={require('../add.png')} alt='add' onClick={openRoutinePopup} />
+                                    <img src={require('../add.png')} alt='add' onClick={openRoutinePopup} style={{ width: '20px', height: '20px' }} />
                                 </div>
                             </Box>
                         </div>
@@ -131,38 +162,16 @@ export default function BasicModal(props) {
                                             <div className='boxsubcontent'>
                                                 <img src={require('../Ellipse.png')} alt='ellipse' className='ellipseIcon' />
                                                 <img src={require('../Directions.png')} alt='direction' className='directionIcon' />
-                                                <Typography id="modal-modal-description">
+                                                <Typography id="modal-modal-description" className='action-title'>
                                                     {item.action_title}
                                                 </Typography>
                                             </div>
                                             <div className='boxsubcontent'>
-                                                <Typography id="modal-modal-description" sx={{ marginRight: '10px' }}>
+                                                <Typography className="action-time" id="modal-modal-description" sx={{ marginRight: '10px' }}>
                                                     {item.time}
                                                 </Typography>
-                                                <img src={require('../Expand.png')} alt='expand' />
-                                                <DeleteIcon onClick={handleClickOpen} />
+                                                <img src={require('../Expand.png')} alt='expand' style={{ width: '20px', height: '20px' }} />
 
-                                                <Dialog
-                                                    open={open}
-                                                    onClose={handleDeletePopup}
-                                                    aria-labelledby="alert-dialog-title"
-                                                    aria-describedby="alert-dialog-description"
-                                                >
-                                                    <DialogTitle id="alert-dialog-title">
-                                                        {"Delete Action"}
-                                                    </DialogTitle>
-                                                    <DialogContent>
-                                                        <DialogContentText id="alert-dialog-description">
-                                                            Are you sure you want to delete this action?
-                                                        </DialogContentText>
-                                                    </DialogContent>
-                                                    <DialogActions className='dialogactionsection'>
-                                                        <Button onClick={handleDeletePopup} variant="contained" color="error">No</Button>
-                                                        <Button onClick={handleDeletePopup} variant="contained" color="primary" autoFocus>
-                                                            Yes
-                                                        </Button>
-                                                    </DialogActions>
-                                                </Dialog>
                                             </div>
                                         </Box>
                                     </div>

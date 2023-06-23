@@ -10,6 +10,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Divider from '@mui/material/Divider';
+import FormLabel from '@mui/material/FormLabel';
 import { useSelector, useDispatch } from 'react-redux';
 import { setFormPopup, setActions } from '../store/reducers/createRoutine';
 import axios from 'axios';
@@ -93,15 +95,15 @@ export default function CreateAction(props) {
           <Typography className="title" id="modal-modal-title" variant="h6" component="h2">
             Create Action
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Please describe the actions you would like the family to Sync.
-          </Typography>
+          </Typography> */}
           <FormControl fullWidth sx={{ mt: 2 }}>
-            <TextField id="outlined-basic" label="Title" variant="outlined" onChange={handleTitle} />
+            <TextField id="outlined-basic" label="Title" variant="outlined" className='label-size' onChange={handleTitle} />
           </FormControl>
 
           <FormControl fullWidth sx={{ mt: 2 }}>
-            <InputLabel id="demo-simple-select-label">Type</InputLabel>
+            <InputLabel id="demo-simple-select-label" sx={{fontSize:14}}>Type</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -122,10 +124,11 @@ export default function CreateAction(props) {
 
 
           <FormControl fullWidth sx={{ mt: 2 }}>
+          <FormLabel sx={{fontSize:14}}>Target Time</FormLabel>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <TextField id="outlined-basic" variant="outlined" onChange={handleHours} />
-              <strong style={{ fontSize: '40px' }}>:</strong>
-              <TextField id="outlined-basic" variant="outlined" onChange={handleMinutes} />
+              <TextField style={{width:'200px'}} id="outlined-basic" variant="outlined" onChange={handleHours} />
+              <strong style={{ fontSize: '40px'}}>:</strong>
+              <TextField style={{width:'200px'}} id="outlined-basic" variant="outlined" onChange={handleMinutes} />
               <div>
                 <div className='amcontent' onClick={() => handleClockMode('AM')}>AM</div>
                 <div className='amcontent1' onClick={() => handleClockMode('PM')}>PM</div>
@@ -138,7 +141,7 @@ export default function CreateAction(props) {
           </FormControl>
 
           <FormControl fullWidth sx={{ mt: 2 }}>
-            <InputLabel id="demo-simple-select-label">Duration</InputLabel>
+            <InputLabel id="demo-simple-select-label" sx={{fontSize:14}}>Duration</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -151,7 +154,7 @@ export default function CreateAction(props) {
               <MenuItem value={30}>Thirty</MenuItem>
             </Select>
           </FormControl>
-
+          <Divider light style={{marginTop:'8rem'}}/>
           <FormControl className='form-buttons' sx={{ mt: 2 }}>
             <Button variant="outlined" className="savebutton" onClick={handleClose}>Discard</Button>
             <Button variant="outlined" className="savebutton" sx={{ ml: 2 }} onClick={handleSave}>Save</Button>
