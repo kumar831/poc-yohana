@@ -6,7 +6,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import CreateAction from './CreateAction';
 import { useSelector, useDispatch } from 'react-redux';
 import { setShowActionPopup, setFormPopup } from '.././store/reducers/createRoutine';
-import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -15,6 +14,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import axios from 'axios';
+import ActionForm from './ActionForm';
 
 const style = {
     position: 'absolute',
@@ -27,15 +27,7 @@ const style = {
     borderRadius: 35,
     boxShadow: 24,
 };
-const boxstyle = {
-    width: '65%',
-    bgcolor: '#FFFFFF',
-    borderRadius: '6px',
-    height: '45px',
-    padding: '4px',
-    display: 'flex',
-    justifyContent: 'space-between',
-}
+
 const boxstyle1 = {
     width: '65%',
     bgcolor: '#FFFFFF',
@@ -48,7 +40,7 @@ const boxstyle1 = {
 }
 
 export default function BasicModal(props) {
-    const routineData = props.routine;
+    const routine_details = props.routine;
     const dispatch = useDispatch();
     const [actionForm, showActionForm] = React.useState(false);
     const handleClose = () => {
@@ -71,12 +63,12 @@ export default function BasicModal(props) {
     const handleDeletePopup = () => {
         setOpen(false);
     };
-     const handleDeleteRoutine=(data)=>{
+    const handleDeleteRoutine = (data) => {
         console.log(data)
         // axios.delete(deleteURL,{
         //     routine_id:
         // })
-     }
+    }
 
     return (
         <div>
@@ -105,10 +97,10 @@ export default function BasicModal(props) {
                         </IconButton>
                         <div style={{ display: 'flex' }}>
                             <p className='popup-heading'>
-                                {routineData.routine_name}
+                                {routine_details.title}
                             </p>
                             <img src={require('../edit.png')} alt='edit' className='editIcon' />
-                            <DeleteIcon onClick={handleClickOpen} style={{ width: '20px', height: '20px', marginTop:'10px' }} />
+                            <DeleteIcon onClick={handleClickOpen} style={{ width: '20px', height: '20px', marginTop: '10px' }} />
 
                             <Dialog
                                 open={open}
@@ -126,7 +118,7 @@ export default function BasicModal(props) {
                                 </DialogContent>
                                 <DialogActions className='dialogactionsection'>
                                     <Button onClick={handleDeletePopup} variant="contained" color="error">No</Button>
-                                    <Button onClick={handleDeleteRoutine(routineData)} variant="contained" color="primary" autoFocus>
+                                    <Button onClick={handleDeleteRoutine(routine_details)} variant="contained" color="primary" autoFocus>
                                         Yes
                                     </Button>
                                 </DialogActions>
@@ -134,7 +126,7 @@ export default function BasicModal(props) {
                         </div>
 
                         <p className='popup-subheading'>
-                            {routineData.start_time}
+                            {routine_details.start_time}
                         </p>
                         <div className='circle-div'>
                             <div className='white-circle'>S</div>
@@ -154,36 +146,11 @@ export default function BasicModal(props) {
                                 </div>
                             </Box>
                         </div>
-                        {
-                            actionsData.length > 0 && actionsData.map((item) => {
-                                return (
-                                    <div className='boxcontainer'>
-                                        <Box sx={boxstyle}>
-                                            <div className='boxsubcontent'>
-                                                <img src={require('../Ellipse.png')} alt='ellipse' className='ellipseIcon' />
-                                                <img src={require('../Directions.png')} alt='direction' className='directionIcon' />
-                                                <Typography id="modal-modal-description" className='action-title'>
-                                                    {item.action_title}
-                                                </Typography>
-                                            </div>
-                                            <div className='boxsubcontent'>
-                                                <Typography className="action-time" id="modal-modal-description" sx={{ marginRight: '10px' }}>
-                                                    {item.time}
-                                                </Typography>
-                                                <img src={require('../Expand.png')} alt='expand' style={{ width: '20px', height: '20px' }} />
-
-                                            </div>
-                                        </Box>
-                                    </div>
-                                )
-                            })
-                        }
+                        <ActionForm routineActions={routine_details} />
                     </div>
-
-
                 </Box>
             </Modal>
-            {actionForm && (<CreateAction routine={routineData} />)}
+            {actionForm && (<CreateAction routine={routine_details} />)}
 
         </div>
     );

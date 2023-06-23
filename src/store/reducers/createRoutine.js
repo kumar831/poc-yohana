@@ -5,6 +5,7 @@ const initialState = {
     showActionPopup: false,
     showFormPopup: false,
     allActions: '',
+    allRoutines: ''
 }
 
 export const createRoutine = createSlice({
@@ -22,11 +23,14 @@ export const createRoutine = createSlice({
         },
         setActions: (state, action) => {
             state.allActions = action.payload;
+        },
+        setAllRoutines: (state,action) => {
+            state.allRoutines = action.payload
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { setRoutineDetails, setShowActionPopup, setFormPopup, setActions } = createRoutine.actions
+export const { setRoutineDetails, setShowActionPopup, setFormPopup, setActions, setAllRoutines } = createRoutine.actions
 
 export default createRoutine.reducer

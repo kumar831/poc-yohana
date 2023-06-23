@@ -41,7 +41,9 @@ body {
     font-family: GT Walsheim !important;
     color: var(--typography-900, #1A1A1A);
 }
-
+.css-l95o9f  {
+  height: 660px !important
+}
 .header {
   width: 560px !important;
   height: 32px !important;

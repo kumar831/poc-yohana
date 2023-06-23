@@ -3,9 +3,10 @@ import { Calendar, momentLocalizer } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment'
 import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, usePrevious } from 'react';
 import * as React from 'react';
 import DisplayRoutine from './DisplayRoutine';
-import { setRoutineDetails, setShowActionPopup, setActions } from '.././store/reducers/createRoutine';
+import { setShowActionPopup, setActions } from '.././store/reducers/createRoutine';
 import axios from 'axios';
 
 const localizer = momentLocalizer(moment);
@@ -13,42 +14,60 @@ const localizer = momentLocalizer(moment);
 const now = new Date();
 
 export default function BigCalendar() {
-    const allRoutines = useSelector((state) => state.routine)
+    const allRoutines = useSelector((state) => state.routine.allRoutines)
     const [getAllRoutines, setGetAllRoutines] = React.useState([])
     const [actionPopup, setActionPopup] = React.useState(false)
     const [displayRoutine, setDisplayRoutine] = React.useState('')
+    const [routines, setRoutines] = React.useState('');
 
-    const GET_ROUTINES = 'https://x8ki-letl-twmt.n7.xano.io/api:kbXGTIcC/routine';
+    const ROUTINE_URL = "https://xmto-nusu-iyz1.n7c.xano.io/api:eeVB7TYf/routine";
     const dispatch = useDispatch();
 
-    React.useEffect(() => {
+    useEffect(() => {
         getRoutines();
-    })
+    }, [])
+
+    useEffect(() => {
+        if (allRoutines && allRoutines.length) {
+            handleRoutineItems(allRoutines)
+            setRoutines(allRoutines);
+        }
+    }, [allRoutines])
 
     const getRoutines = () => {
-        let arrayRoutines = [];
-        if (allRoutines.routine.length) {
-            allRoutines.routine.map((item, index) => {
-                const obj = {
-                    id: index,
-                    title: item.routine_name,
-                    start: moment({ hours: item.start }).toDate(),
-                    end: moment({ hours: item.end }).toDate(),
-                }
-                arrayRoutines.push(obj)
-            })
-            setGetAllRoutines(arrayRoutines);
-        }
+        axios.get(ROUTINE_URL).then(response => {
+            if (response.status == '200') {
+                handleRoutineItems(response.data);
+                setRoutines(response.data);
+            }
+        })
+    }
+
+    const handleRoutineItems = (routineItems) => {
+        let routines = [];
+        routineItems.map((item, index) => {
+            const startTime = item.start_time.split(':');
+            const endTime = item.end_time.split(':');
+            const obj = {
+                id: item.id,
+                title: item.title,
+                start: moment({ hours: startTime[0] }).toDate(),
+                end: moment({ hours: endTime[0] }).toDate(),
+            }
+            routines.push(obj)
+        })
+        setGetAllRoutines(routines);
     }
 
     const openActionPopup = (event) => {
         dispatch(setShowActionPopup(true))
         setActionPopup(true);
-        allRoutines.routine.map((item, index) => {
-            if (event.id == index) {
+        routines.map((item) => {
+            if (event.id == item.id) {
                 setDisplayRoutine(item);
             }
         })
+        dispatch(setActions(routines));
     }
     return (
         <div>

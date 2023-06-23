@@ -13,7 +13,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Divider from '@mui/material/Divider';
 import FormLabel from '@mui/material/FormLabel';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFormPopup, setActions } from '../store/reducers/createRoutine';
+import { setFormPopup, setAllRoutines, setActions } from '../store/reducers/createRoutine';
 import axios from 'axios';
 
 
@@ -31,14 +31,14 @@ const style = {
 };
 
 export default function CreateAction(props) {
-  const routineData = props.routine
+  const routine_details = props.routine
   const routine = useSelector((state) => state.routine)
   const dispatch = useDispatch();
   const handleClose = () => {
     dispatch(setFormPopup(false));
   };
-  const ROUTINE_URL = 'https://x8ki-letl-twmt.n7.xano.io/api:Hku87tmd/routine';
-  
+  const ROUTINE_URL = 'https://xmto-nusu-iyz1.n7c.xano.io/api:eeVB7TYf/routine'
+
   const [type, setType] = React.useState('');
   const [duration, setDuration] = React.useState('');
   const [title, setTitle] = React.useState('');
@@ -53,16 +53,40 @@ export default function CreateAction(props) {
     setDuration(event.target.value);
   };
   const handleSave = () => {
-    axios.post(ROUTINE_URL, {
-      "time": hourly + ':' + minutes + ':' + clockMode,
-      "routine": routineData.routine_name,
-      "action_type": type,
-      "action_title": title,
-      "duration_in_sec": duration,
-      "routine_days": routineData.days,
-      "user_id": 0
-    }).then((response) => {
+    const actions = [];
+    const actionsRoutines = [];
+    const actionObj = {
+      "title": title,
+      "type": type,
+      "start_time": '',
+      "end_time": '',
+      "family_member": '',
+      "metadata": []
+    }
+    actionsRoutines.push(routine_details.actions)
+    actions.push(actionObj)
+    const actionsObj = [...actions, ...routine_details.actions];
+    const updateRoutineObj = {
+      "title": routine_details.title,
+      "family_id": routine_details.family_id,
+      "start_time": routine_details.start_time,
+      "end_time": routine_details.end_time,
+      "days": routine_details.days,
+      "start_date": routine_details.start_date,
+      "end_date": routine_details.end_date,
+      "frequency": routine_details.frequency,
+      "color": "",
+      "actions": actionsObj,
+      "routine_id": routine_details.id
+    }
+    console.log('updateRoutineObj', updateRoutineObj);
+
+    axios.post(ROUTINE_URL + '/' + routine_details.id, updateRoutineObj).then((response) => {
       if (response.status == '200') {
+        setTitle('');
+        setClockMode('');
+        setType('')
+        setDuration('')
         handleClose();
         axios.get(ROUTINE_URL).then(response => {
           dispatch(setActions(response.data));
@@ -70,7 +94,7 @@ export default function CreateAction(props) {
       }
     })
   };
-  
+
   const handleTitle = (e) => {
     setTitle(e.target.value);
   }
@@ -103,7 +127,7 @@ export default function CreateAction(props) {
           </FormControl>
 
           <FormControl fullWidth sx={{ mt: 2 }}>
-            <InputLabel id="demo-simple-select-label" sx={{fontSize:14}}>Type</InputLabel>
+            <InputLabel id="demo-simple-select-label" sx={{ fontSize: 14 }}>Type</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -124,11 +148,11 @@ export default function CreateAction(props) {
 
 
           <FormControl fullWidth sx={{ mt: 2 }}>
-          <FormLabel sx={{fontSize:14}}>Target Time</FormLabel>
+            <FormLabel sx={{ fontSize: 14 }}>Target Time</FormLabel>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <TextField style={{width:'200px'}} id="outlined-basic" variant="outlined" onChange={handleHours} />
-              <strong style={{ fontSize: '40px'}}>:</strong>
-              <TextField style={{width:'200px'}} id="outlined-basic" variant="outlined" onChange={handleMinutes} />
+              <TextField style={{ width: '200px' }} id="outlined-basic" variant="outlined" onChange={handleHours} />
+              <strong style={{ fontSize: '40px' }}>:</strong>
+              <TextField style={{ width: '200px' }} id="outlined-basic" variant="outlined" onChange={handleMinutes} />
               <div>
                 <div className='amcontent' onClick={() => handleClockMode('AM')}>AM</div>
                 <div className='amcontent1' onClick={() => handleClockMode('PM')}>PM</div>
@@ -141,7 +165,7 @@ export default function CreateAction(props) {
           </FormControl>
 
           <FormControl fullWidth sx={{ mt: 2 }}>
-            <InputLabel id="demo-simple-select-label" sx={{fontSize:14}}>Duration</InputLabel>
+            <InputLabel id="demo-simple-select-label" sx={{ fontSize: 14 }}>Duration</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -154,7 +178,7 @@ export default function CreateAction(props) {
               <MenuItem value={30}>Thirty</MenuItem>
             </Select>
           </FormControl>
-          <Divider light style={{marginTop:'8rem'}}/>
+          <Divider light style={{ marginTop: '8rem' }} />
           <FormControl className='form-buttons' sx={{ mt: 2 }}>
             <Button variant="outlined" className="savebutton" onClick={handleClose}>Discard</Button>
             <Button variant="outlined" className="savebutton" sx={{ ml: 2 }} onClick={handleSave}>Save</Button>
