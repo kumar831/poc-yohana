@@ -4,7 +4,7 @@
 
 body {
   background-color: #f4f0ec;
-  font-family: GT Walsheim;
+  /* font-family: GT Walsheim; */
 }
 
 .App-logo {
@@ -833,4 +833,121 @@ font-weight: 700 !important;
 }
 .label-size label {
   font-size: 14px;
+}
+/*****Login Form CSS*******/
+.login-container{
+	position: relative;
+	width:100%;
+	height: 100%;
+}
+.login-container label{
+	color: #000;
+font-size: 21.333px;
+font-weight: 700;
+line-height: 32px;
+letter-spacing: 0.213px;
+margin: 60px;
+display: flex;
+justify-content: center;
+}
+.login-container input{
+	  width: 311px;
+    height: 56px;
+    border-radius: 8px;
+    border: 1.5px solid var(--brand-dark-sand, #C6C4C3);
+    background: var(--brand-white, #FFF);
+    display: flex;
+    margin: 20px auto;
+    padding-left: 20px;
+    color: var(--brand-light-stone, #919097);
+    font-size: 16px;
+    letter-spacing: 0.32px;
+}
+.login-container button{
+	  margin: 20px auto;
+    justify-content: center;
+    display: flex;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 35px;
+    transition: .2s ease-in;
+    cursor: pointer;
+    border: none;
+    width: 330px;
+    height: 48px;
+    padding: 15px;
+    flex-shrink: 0;
+    border-radius: 24px;
+    background: var(--brand-dark-sand, #C6C4C3);
+    color: #ffffff;
+}
+a.signup-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  align-self: stretch;
+  color: #1A1A1A;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0.16px;
+  text-decoration-line: underline;
+  margin: 90px 265px 0px 20px;
+}
+a.signin-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  align-self: stretch;
+  color: #1A1A1A;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0.16px;
+  text-decoration-line: underline;
+  margin: 30px 270px 0px 20px;
+}
+/********Add Family CSS**************/
+.family-container{
+    margin-top: 10rem;
+}
+.family-content{
+  display: flex;
+  justify-content: center;
+  margin-left: 7rem;
+  align-items: center;
+}
+.familyname{
+  width: 311px;
+  height: 56px;
+  border-radius: 8px;
+  border: 1.5px solid var(--brand-dark-sand, #C6C4C3);
+  background: var(--brand-white, #FFF);
+  display: flex;
+  margin: 20px auto;
+  padding-left: 20px;
+  color: var(--brand-light-stone, #919097);
+  font-size: 16px;
+  letter-spacing: 0.32px;
+}
+.familyname1{
+  width: 311px;
+  height: 56px;
+  border-radius: 8px;
+  border: 1.5px solid var(--brand-dark-sand, #C6C4C3);
+  background: var(--brand-white, #FFF);
+  display: flex;
+  padding-left: 20px;
+  color: var(--brand-light-stone, #919097);
+  font-size: 16px;
+  letter-spacing: 0.32px;
+}
+img.addfamilyicon {
+  width: 25px;
+  height: 25px;
+  position: relative;
+  right: 58px;
+  cursor: pointer;
 }

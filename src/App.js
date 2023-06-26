@@ -11,6 +11,9 @@ import DisplayRoutine from './components/DisplayRoutine';
 //import CalendarClock from './components/CalendarTime';
 import reportWebVitals from './reportWebVitals';
 import BigCalendar from "./components/BigCalendar";
+import Login from "./components/Login"
+import Signup from "./components/Signup";
+import AddFamily from "./components/AddFamily";
 
 
 function App() {
@@ -86,9 +89,11 @@ function App() {
           Month Outline
         </Button>
       </div> */}
-      {/* <CalendarClock/> */}
-      <BigCalendar/>
-      <CreateRoutine/>
+      {/* <BigCalendar/>
+      <CreateRoutine/> */}
+      {/* <Login/> */}
+      <Signup/>
+      {/* <AddFamily/> */}
     </div>
   );
 }
