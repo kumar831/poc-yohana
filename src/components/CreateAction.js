@@ -13,7 +13,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Divider from '@mui/material/Divider';
 import FormLabel from '@mui/material/FormLabel';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFormPopup, setActions } from '../store/reducers/createRoutine';
+import { setFormPopup, setActions, setAllRoutines } from '../store/reducers/createRoutine';
 import axios from 'axios';
 
 const style = {
@@ -52,8 +52,8 @@ export default function CreateAction(props) {
     setDuration(event.target.value);
   };
   const handleSave = () => {
-    const actions = [];
-    const actionsRoutines = [];
+    let actions = [];
+    let actionsRoutines = [];
     const actionObj = {
       "title": title,
       "type": type,
@@ -64,7 +64,7 @@ export default function CreateAction(props) {
     }
     actionsRoutines.push(routine_details.actions)
     actions.push(actionObj)
-    const actionsObj = [...actions, ...routine_details.actions];
+    let actionsObj = [...actions, ...routine_details.actions];
     const updateRoutineObj = {
       "title": routine_details.title,
       "family_id": routine_details.family_id,
@@ -78,8 +78,6 @@ export default function CreateAction(props) {
       "actions": actionsObj,
       "routine_id": routine_details.id
     }
-    console.log('updateRoutineObj', updateRoutineObj);
-
     axios.post(ROUTINE_URL + '/' + routine_details.id, updateRoutineObj).then((response) => {
       if (response.status == '200') {
         setTitle('');
@@ -89,6 +87,7 @@ export default function CreateAction(props) {
         handleClose();
         axios.get(ROUTINE_URL).then(response => {
           dispatch(setActions(response.data));
+          dispatch(setAllRoutines(response.data));
         })
       }
     })

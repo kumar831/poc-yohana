@@ -15,6 +15,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import axios from 'axios';
 import ActionForm from './ActionForm';
+import { useEffect } from 'react'
 
 const style = {
     position: 'absolute',
@@ -42,18 +43,32 @@ const boxstyle1 = {
 export default function DisplayRoutine(props) {
     const routine_details = props.routine;
     const dispatch = useDispatch();
+    const allRoutines = useSelector((state) => state.routine.allRoutines)
     const [actionForm, showActionForm] = React.useState(false);
     const handleClose = () => {
         dispatch(setShowActionPopup(false));
     }
+    const [actionData, setActionData] = React.useState('');
     const routine = useSelector((state) => state.routine)
+    const ROUTINE_URL = 'https://xmto-nusu-iyz1.n7c.xano.io/api:eeVB7TYf/routine';
     const openRoutinePopup = () => {
         dispatch(setFormPopup(true));
         dispatch(setShowActionPopup(true));
         showActionForm(true);
+        if(allRoutines && allRoutines.length) {
+            allRoutines.map((item) => {
+                if(item.id == routine_details.id)  {
+                    setActionData(item);
+                }
+            })
+        }  
     }
+    useEffect(() => {
+        axios.get(ROUTINE_URL).then(response => {
+            dispatch(setAllRoutines(response.data));
+        });
+    },[])
     const [open, setOpen] = React.useState(false);
-    const ROUTINE_URL = 'https://xmto-nusu-iyz1.n7c.xano.io/api:eeVB7TYf/routine';
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -62,6 +77,7 @@ export default function DisplayRoutine(props) {
     const handleDeletePopup = () => {
         setOpen(false);
     };
+
     const handleDeleteRoutine = (data) => {
         if (data) {
             axios.delete(ROUTINE_URL + '/' + data.id, data).then(response => {
@@ -156,8 +172,7 @@ export default function DisplayRoutine(props) {
                     </div>
                 </Box>
             </Modal>
-            {actionForm && (<CreateAction routine={routine_details} />)}
-
+            {actionForm && (<CreateAction routine={actionData} />)}
         </div>
     );
 }

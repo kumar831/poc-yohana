@@ -51,7 +51,7 @@ export default function ActionForm(props) {
     return (
         <div>
             {
-                actions.actions && actions.actions.length > 0 && actions.actions.map((action, index) => {
+                actions.actions && actions.actions.length > 0 && actions.actions.map((action) => {
                     return (
                         <div className='boxcontainer'>
                             <Box sx={boxstyle}>

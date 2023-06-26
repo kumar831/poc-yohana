@@ -25,7 +25,7 @@ export default function BigCalendar() {
 
     useEffect(() => {
         getRoutines();
-    }, [])
+    },[])
 
     useEffect(() => {
         if (allRoutines && allRoutines.length) {
@@ -88,7 +88,6 @@ export default function BigCalendar() {
                                     e => {
                                         openActionPopup(event)
                                         e.preventDefault();
-
                                     }
                                 }
                             >

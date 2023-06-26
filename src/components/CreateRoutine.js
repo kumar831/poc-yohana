@@ -59,10 +59,10 @@ export default function CreateRoutinePost() {
             "title": routineTitle,
             "family_id": index,
             "start_time": startHourly + ':' + startMinutes + ':' + mode,
-            "end_time": "",
+            "end_time": endHourly + ':' + endMinutes + ':' + mode,
             "days": days,
             "start_date": "",
-            "end_date": endHourly + ':' + endMinutes + ':' + mode,
+            "end_date": "",
             "frequency": frequency,
             "color": "",
             "actions": []
