@@ -13,9 +13,8 @@ import Checkbox from '@mui/material/Checkbox';
 import Divider from '@mui/material/Divider';
 import FormLabel from '@mui/material/FormLabel';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFormPopup, setAllRoutines, setActions } from '../store/reducers/createRoutine';
+import { setFormPopup, setActions } from '../store/reducers/createRoutine';
 import axios from 'axios';
-
 
 const style = {
   position: 'absolute',
@@ -144,8 +143,6 @@ export default function CreateAction(props) {
               <MenuItem value='No Action'>No Action</MenuItem>
             </Select>
           </FormControl>
-
-
 
           <FormControl fullWidth sx={{ mt: 2 }}>
             <FormLabel sx={{ fontSize: 14 }}>Target Time</FormLabel>

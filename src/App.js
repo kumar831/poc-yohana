@@ -1,18 +1,14 @@
 import { useState } from "react";
 import "./App.css";
-import DailyScale from "./components/DailyScale";
-import Clockscale from "./components/ClockScale";
-import MonthlyScale from "./components/MonthlyScale";
-import WeeklyScale from "./components/WeeklyScale";
+import DailyScale from "./components//scale/DailyScale";
+import Clockscale from "./components/scale/ClockScale";
+import MonthlyScale from "./components/scale/MonthlyScale";
+import WeeklyScale from "./components/scale/WeeklyScale";
 import { Button } from "react-bootstrap";
-import FormRoutine from './components/CreateAction'
 import CreateRoutine from './components/CreateRoutine'
-import DisplayRoutine from './components/DisplayRoutine';
-//import CalendarClock from './components/CalendarTime';
-import reportWebVitals from './reportWebVitals';
 import BigCalendar from "./components/BigCalendar";
-import Login from "./components/Login"
-import Signup from "./components/Signup";
+import Login from "./components/auth/Login"
+import Signup from "./components/auth/Signup";
 import AddFamily from "./components/AddFamily";
 
 
@@ -89,10 +85,10 @@ function App() {
           Month Outline
         </Button>
       </div> */}
-      {/* <BigCalendar/>
-      <CreateRoutine/> */}
+      <BigCalendar/>
+      <CreateRoutine/>
       {/* <Login/> */}
-      <Signup/>
+      {/* <Signup/> */}
       {/* <AddFamily/> */}
     </div>
   );

@@ -2,12 +2,11 @@ import React, { useEffect } from "react";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5percent from "@amcharts/amcharts5/percent";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
-import "../App.css";
+import "../../App.css";
 
-
-export default function WeeklyScale() {
+export default function MonthlyScale() {
   useEffect(() => {
-    // Create root element
+    // Create root element2
     let root = am5.Root.new("chartdiv");
 
     // Set themes
@@ -30,6 +29,8 @@ export default function WeeklyScale() {
         valueField: "inner",
         categoryField: "country",
         alignLabels: false,
+        radius: am5.percent(70),
+        
       })
     );
 
@@ -38,8 +39,8 @@ export default function WeeklyScale() {
     series0.ticks.template.setAll({ forceHidden: true });
     series0.labels.template.setAll({ forceHidden: true });
     series0.slices.template.setAll({
-      stroke: am5.color("#000000"),
-      fill: am5.color("#000000"),
+      stroke: am5.color("#ffffff"),
+      fill: am5.color("#ffffff"),
     });
     series0.slices.template.states.create("hover", { scale: 0.95 });
     //to disable the tooltip on inner circle
@@ -51,10 +52,10 @@ export default function WeeklyScale() {
       y: am5.p50,
       centerX: am5.p50,
       centerY: am5.p50,
-      fill: am5.color("#ffffff"),
+      fill: am5.color("#000000"),
       fontSize: 15
     }));
-    label.set("text", "JUNE 3-9");
+    label.set("text", "June 3-9");
 
     ///1st Outer circle
     let series1 = chart.series.push(
@@ -62,6 +63,7 @@ export default function WeeklyScale() {
         valueField: "outer",
         categoryField: "country",
         alignLabels: false,
+        innerRadius: am5.percent(100)
       })
     );
 
@@ -70,7 +72,8 @@ export default function WeeklyScale() {
       strokeWidth: 0,
       tooltipText:
         "{category}: {valuePercentTotal.formatNumber('0.00')}% ({value} outer)",
-      fill: am5.color("#ffffff"),
+      fill: am5.color("#48D1CC"),
+      
     });
 
     series1.ticks.template.setAll({ forceHidden: true });
@@ -85,7 +88,7 @@ export default function WeeklyScale() {
         valueField: "inner",
         categoryField: "country",
         alignLabels: false,
-        radius:am5.percent(85)
+        innerRadius: am5.percent(100),
       })
     );
 
@@ -100,41 +103,27 @@ export default function WeeklyScale() {
     series2.slices.template.states.create("hover", { scale: 0.95 });
     //to disable the tooltip on inner circle
     series2.slices.template.set("tooltipText", "");
-    //Added bullets on the 2nd last circle
-
-    series2.bullets.push(function() {
-      let cirCleMotion = am5.Bullet.new(root, {
-        sprite: am5.Picture.new(root, {
-          width: 32,
-          height: 32,
-          x: am5.percent(30),
-          y: am5.percent(50),
-          centerX: am5.percent(50),
-          centerY: am5.percent(50),
-          src: require("../activity2.png"),
-          className:"picture-item"
+    series2.bullets.push(function(root, series) {
+      console.log('series',series)
+      let circles = series2._data._values;
+      let dataCircle
+      if(circles) {
+        dataCircle = circles.map((value) => {
+          if(value.isCircle) {
+            var circle = am5.Circle.new(root, {
+              radius: 5,
+              fill: am5.color("#000000"),
+            });
+            circle.events.on("click", function(ev) {
+              console.log("Clicked on a bullet!", ev.target);
+            });
+            return am5.Bullet.new(root, {
+              sprite: circle
+            });
+          }
         })
-      });
-      cirCleMotion.events.on("click", function(e) {
-        console.log('nnnn', e)
-      });
-      return cirCleMotion
+      } 
     });
-
-    // series2.bullets.push(function(root) {ß
-    //   var circle = am5.Circle.new(root, {
-    //     radius: 5,
-    //     //fill: am5.color("#000000"),
-    //     templateField: "bulletSettings"
-    //   });
-    //   circle.events.on("click", function(ev) {
-    //     console.log("Clicked on a bullet!", ev.target);
-    //   });
-    //   return am5.Bullet.new(root, {
-    //     sprite: circle
-    //   });
-    // });
-  
 
      //3rd Outer circle
      let series3 = chart.series.push(
@@ -142,10 +131,9 @@ export default function WeeklyScale() {
         valueField: "inner",
         categoryField: "country",
         alignLabels: false,
-        innerRadius:am5.percent(85)
+        innerRadius:am5.percent(90)
       })
     );
-
 
     series3.ticks.template.setAll({ forceHidden: true });
     //series2.labels.template.setAll({ forceHidden: true });
@@ -168,69 +156,185 @@ export default function WeeklyScale() {
 
     let data = [
       {
-        country: "Monday",
+        country: "1",
         outer: 500,
         inner: 500,
-        bulletSettings: {
-          fill: am5.color(0x009ACD)
-        }
+        isCircle: true
+      
       },
       {
-        country: "Tuesday",
+        country: "2",
         outer: 500,
         inner: 500,
-        bulletSettings: {
-          fill: am5.color(0x009ACD)
-        }
+        isCircle: false
       },
       {
-        country: "Wednesday",
+        country: "3",
         outer: 500,
         inner: 500,
-        bulletSettings: {
-          fill: am5.color(0x009ACD)
-        }
+        isCircle: false
       },
       {
-        country: "Thursday",
+        country: "4",
         outer: 500,
         inner: 500,
-        bulletSettings: {
-          fill: am5.color(0x009ACD)
-        }
       },
       {
-        country: "Friday",
+        country: "5",
         outer: 500,
         inner: 500,
-        bulletSettings: {
-          fill: am5.color(0x009ACD)
-        }
       },
       {
-        country: "Saturday",
+        country: "6",
         outer: 500,
         inner: 500,
-        bulletSettings: {
-          fill: am5.color(0x009ACD)
-        }
       },
       {
-        country: "Sunday",
+        country: "7",
         outer: 500,
         inner: 500,
-        bulletSettings: {
-          fill: am5.color(0x009ACD)
-        }
+      },
+      {
+        country: "8",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "9",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "10",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "11",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "12",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "13",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "15",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "16",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "17",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "18",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "19",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "20",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "21",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "22",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "23",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "24",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "25",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "26",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "27",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "28",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "29",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "30",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "31",
+        outer: 500,
+        inner: 500,
       },
       {
         country: "",
         outer: 500,
         inner: 500,
-        bulletSettings: {
-          fill: am5.color(0x009ACD)
-        }
       },
+      {
+        country: "",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "",
+        outer: 500,
+        inner: 500,
+      },
+      {
+        country: "",
+        outer: 500,
+        inner: 500,
+      },
+    
     ];
 
     // Set data

@@ -47,7 +47,6 @@ export default function DisplayRoutine(props) {
         dispatch(setShowActionPopup(false));
     }
     const routine = useSelector((state) => state.routine)
-    const [deleteRoutine, setDeleteRoutine] = React.useState(false);
     const openRoutinePopup = () => {
         dispatch(setFormPopup(true));
         dispatch(setShowActionPopup(true));
@@ -66,7 +65,6 @@ export default function DisplayRoutine(props) {
     const handleDeleteRoutine = (data) => {
         if (data) {
             axios.delete(ROUTINE_URL + '/' + data.id, data).then(response => {
-                console.log('response', response);
                 setOpen(false);
                 dispatch(setShowActionPopup(false));
                 if (response.status == '200') {

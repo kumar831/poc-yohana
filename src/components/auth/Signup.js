@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../App.css'
+import '../../App.css'
 function Signup() {
     const [showpasscode, setshowpasscode] = useState(false);
     const [password, setPassword] = useState("**************");

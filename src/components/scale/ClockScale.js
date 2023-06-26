@@ -53,14 +53,14 @@ function ClockScale() {
       <span className="graydot dotstyle12"></span>
       <span className="clockactivity1">
         <img
-          src={require("../notebook.png")}
+          src={require("../../notebook.png")}
           alt=""
           style={{ width: "15px", height: "20px", marginTop: "2px" }}
         ></img>
       </span>
       <span className="clockactivity4">
         <img
-          src={require("../activity2.png")}
+          src={require("../../activity2.png")}
           alt=""
           style={{ width: "15px", height: "20px", marginTop: "3px" }}
         ></img>

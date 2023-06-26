@@ -67,35 +67,35 @@ function DailyScale() {
       <span className="dot whitedot6"></span>
       <span className="activity1">
         <img
-          src={require("../notebook.png")}
+          src={require("../../notebook.png")}
           alt=""
           style={{ width: "35px", height: "35px", marginTop: "8px" }}
         ></img>
       </span>
       <span className="activity2">
         <img
-          src={require("../activity3.png")}
+          src={require("../../activity3.png")}
           alt=""
           style={{ width: "35px", height: "35px", marginTop: "8px" }}
         ></img>
       </span>
       <span className="activity5">
         <img
-          src={require("../activity5.png")}
+          src={require("../../activity5.png")}
           alt=""
           style={{ width: "35px", height: "35px", marginTop: "8px" }}
         ></img>
       </span>
       <span className="activity3">
         <img
-          src={require("../activity4.png")}
+          src={require("../../activity4.png")}
           alt=""
           style={{ width: "35px", height: "35px", marginTop: "8px" }}
         ></img>
       </span>
       <span className="activity4">
         <img
-          src={require("../activity2.png")}
+          src={require("../../activity2.png")}
           alt=""
           style={{ width: "35px", height: "35px", marginTop: "8px" }}
         ></img>
