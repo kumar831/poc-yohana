@@ -58,7 +58,7 @@ export default function CreateAction(props) {
     const actionObj = {
       "title": title,
       "type": type,
-      "start_time": '',
+      "start_time": hourly + ':' + minutes + ':' + clockMode,
       "end_time": '',
       "family_member": '',
       "metadata": []
@@ -181,7 +181,7 @@ export default function CreateAction(props) {
           <Divider light style={{ marginTop: '8rem' }} />
           <FormControl className='form-buttons' sx={{ mt: 2 }}>
             <Button variant="outlined" className="savebutton" onClick={handleClose}>Discard</Button>
-            <Button variant="outlined" className="savebutton" sx={{ ml: 2 }} onClick={handleSave}>Save</Button>
+            <Button variant="outlined" className="savebutton" sx={{ ml: 2 }} onClick={() => handleSave()}>Save</Button>
           </FormControl>
         </Box>
       </Modal>

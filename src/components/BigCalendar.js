@@ -3,7 +3,7 @@ import { Calendar, momentLocalizer } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment'
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, usePrevious } from 'react';
+import { useEffect } from 'react';
 import * as React from 'react';
 import DisplayRoutine from './DisplayRoutine';
 import { setShowActionPopup, setActions } from '.././store/reducers/createRoutine';
@@ -34,6 +34,12 @@ export default function BigCalendar() {
         }
     }, [allRoutines])
 
+    useEffect(() => {
+        if(allRoutines.length == 0) {
+            setGetAllRoutines([]);
+        }   
+    },[allRoutines])
+
     const getRoutines = () => {
         axios.get(ROUTINE_URL).then(response => {
             if (response.status == '200') {
@@ -45,7 +51,7 @@ export default function BigCalendar() {
 
     const handleRoutineItems = (routineItems) => {
         let routines = [];
-        routineItems.map((item, index) => {
+        routineItems.map((item) => {
             const startTime = item.start_time.split(':');
             const endTime = item.end_time.split(':');
             const obj = {

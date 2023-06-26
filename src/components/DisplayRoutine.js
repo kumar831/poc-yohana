@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import CreateAction from './CreateAction';
 import { useSelector, useDispatch } from 'react-redux';
-import { setShowActionPopup, setFormPopup } from '.././store/reducers/createRoutine';
+import { setShowActionPopup, setFormPopup, setAllRoutines } from '.././store/reducers/createRoutine';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -39,7 +39,7 @@ const boxstyle1 = {
     cursor: 'pointer'
 }
 
-export default function BasicModal(props) {
+export default function DisplayRoutine(props) {
     const routine_details = props.routine;
     const dispatch = useDispatch();
     const [actionForm, showActionForm] = React.useState(false);
@@ -47,14 +47,14 @@ export default function BasicModal(props) {
         dispatch(setShowActionPopup(false));
     }
     const routine = useSelector((state) => state.routine)
-    const actionsData = useSelector((state) => state.routine.allActions)
+    const [deleteRoutine, setDeleteRoutine] = React.useState(false);
     const openRoutinePopup = () => {
         dispatch(setFormPopup(true));
         dispatch(setShowActionPopup(true));
         showActionForm(true);
     }
     const [open, setOpen] = React.useState(false);
-    const deleteURL = 'https://x8ki-letl-twmt.n7.xano.io/api:Hku87tmd/routine';
+    const ROUTINE_URL = 'https://xmto-nusu-iyz1.n7c.xano.io/api:eeVB7TYf/routine';
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -64,10 +64,18 @@ export default function BasicModal(props) {
         setOpen(false);
     };
     const handleDeleteRoutine = (data) => {
-        console.log(data)
-        // axios.delete(deleteURL,{
-        //     routine_id:
-        // })
+        if (data) {
+            axios.delete(ROUTINE_URL + '/' + data.id, data).then(response => {
+                console.log('response', response);
+                setOpen(false);
+                dispatch(setShowActionPopup(false));
+                if (response.status == '200') {
+                    axios.get(ROUTINE_URL).then(response => {
+                        dispatch(setAllRoutines(response.data));
+                    })
+                }
+            })
+        }
     }
 
     return (
@@ -100,7 +108,7 @@ export default function BasicModal(props) {
                                 {routine_details.title}
                             </p>
                             <img src={require('../edit.png')} alt='edit' className='editIcon' />
-                            <DeleteIcon onClick={handleClickOpen} style={{ width: '20px', height: '20px', marginTop: '10px' }} />
+                            <DeleteIcon onClick={() => handleClickOpen()} style={{ width: '20px', height: '20px', marginTop: '10px' }} />
 
                             <Dialog
                                 open={open}
@@ -118,7 +126,7 @@ export default function BasicModal(props) {
                                 </DialogContent>
                                 <DialogActions className='dialogactionsection'>
                                     <Button onClick={handleDeletePopup} variant="contained" color="error">No</Button>
-                                    <Button onClick={handleDeleteRoutine(routine_details)} variant="contained" color="primary" autoFocus>
+                                    <Button onClick={() => handleDeleteRoutine(routine_details)} variant="contained" color="primary" autoFocus>
                                         Yes
                                     </Button>
                                 </DialogActions>
